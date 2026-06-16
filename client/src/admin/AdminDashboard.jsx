@@ -1,13 +1,28 @@
 import { useEffect, useState } from 'react';
-import { FolderGit2, Briefcase, Code2, Star, MessageSquare } from 'lucide-react';
+import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check } from 'lucide-react';
 import api from '@/api';
+import { useTheme } from '@/context/ThemeContext';
+
+const themes = [
+  { id: 'green', label: 'Green', color: '#22c55e' },
+  { id: 'cyan', label: 'Cyan', color: '#06b6d4' },
+  { id: 'maroon', label: 'Maroon', color: '#be123c' },
+  { id: 'orange', label: 'Orange', color: '#f97316' },
+  { id: 'red', label: 'Red', color: '#ef4444' },
+  { id: 'purple', label: 'Purple', color: '#a855f7' },
+  { id: 'pink', label: 'Pink', color: '#ec4899' },
+  { id: 'violet', label: 'Violet', color: '#8b5cf6' },
+  { id: 'blue', label: 'Blue', color: '#3b82f6' },
+];
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState([]);
+  const { theme: activeTheme, updateTheme } = useTheme();
+  const [updating, setUpdating] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
-      const sections = ['projects', 'experiences', 'skills', 'testimonials', 'messages'];
+      const sections = ['projects', 'experiences', 'skills', 'testimonials', 'messages', 'achievements'];
       const results = await Promise.all(
         sections.map(async (s) => {
           try {
@@ -23,13 +38,19 @@ export default function AdminDashboard() {
     fetchStats();
   }, []);
 
-  const icons = [FolderGit2, Briefcase, Code2, Star, MessageSquare];
+  const icons = [FolderGit2, Briefcase, Code2, Star, MessageSquare, Award];
+
+  const handleThemeChange = async (id) => {
+    setUpdating(id);
+    await updateTheme(id);
+    setUpdating(null);
+  };
 
   return (
     <div>
       <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5 mb-12">
         {stats.map((stat, i) => {
           const Icon = icons[i];
           return (
@@ -42,11 +63,39 @@ export default function AdminDashboard() {
         })}
       </div>
 
-      <div className="mt-12 glass rounded-2xl p-8 text-center">
-        <h2 className="text-lg font-semibold mb-2">Welcome to your Portfolio Admin</h2>
-        <p className="text-sm text-gray-400">
-          Use the sidebar to manage your portfolio content. All changes are saved to MongoDB.
+      <div className="glass rounded-2xl p-8">
+        <div className="flex items-center gap-3 mb-6">
+          <Palette size={24} className="text-primary" />
+          <h2 className="text-lg font-semibold">Theme Settings</h2>
+        </div>
+        <p className="text-sm text-gray-400 mb-6">
+          Choose a color theme for your portfolio website.
         </p>
+        <div className="flex gap-4">
+          {themes.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => handleThemeChange(t.id)}
+              disabled={updating === t.id}
+              className={`relative flex items-center gap-3 px-6 py-4 rounded-2xl border-2 transition-all ${
+                activeTheme === t.id
+                  ? 'border-primary bg-primary/10'
+                  : 'border-white/10 hover:border-white/20 bg-white/5'
+              } disabled:opacity-50`}
+            >
+              <div
+                className="w-6 h-6 rounded-full border-2 border-white/20"
+                style={{ backgroundColor: t.color }}
+              />
+              <span className="text-sm font-medium">{t.label}</span>
+              {activeTheme === t.id && (
+                <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                  <Check size={14} className="text-white" />
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import FloatingDots from '@/components/FloatingDots';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import SkillsMarquee from '@/components/SkillsMarquee';
+import Achievements from '@/components/Achievements';
 import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
 import Testimonials from '@/components/Testimonials';
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <About />
       <SkillsMarquee />
+      <Achievements />
       <Experience />
       <Projects />
       <Testimonials />

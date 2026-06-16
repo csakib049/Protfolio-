@@ -2,6 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+:root,
+.theme-green {
+  --color-primary-rgb: 34 197 94;
+  --color-primary-hex: #22c55e;
+}
+
+.theme-cyan {
+  --color-primary-rgb: 6 182 212;
+  --color-primary-hex: #06b6d4;
+}
+
+.theme-maroon {
+  --color-primary-rgb: 190 18 60;
+  --color-primary-hex: #be123c;
+}
+
+.theme-orange {
+  --color-primary-rgb: 249 115 22;
+  --color-primary-hex: #f97316;
+}
+
+.theme-red {
+  --color-primary-rgb: 239 68 68;
+  --color-primary-hex: #ef4444;
+}
+
+.theme-purple {
+  --color-primary-rgb: 168 85 247;
+  --color-primary-hex: #a855f7;
+}
+
+.theme-pink {
+  --color-primary-rgb: 236 72 153;
+  --color-primary-hex: #ec4899;
+}
+
+.theme-violet {
+  --color-primary-rgb: 139 92 246;
+  --color-primary-hex: #8b5cf6;
+}
+
+.theme-blue {
+  --color-primary-rgb: 59 130 246;
+  --color-primary-hex: #3b82f6;
+}
+
 @layer utilities {
   .glass {
     background: rgba(255, 255, 255, 0.05);
@@ -18,11 +64,11 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 20px rgba(34, 197, 94, 0.3), 0 0 40px rgba(34, 197, 94, 0.15);
+    text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3), 0 0 40px rgba(var(--color-primary-rgb), 0.15);
   }
 
   .glow-border {
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.2), inset 0 0 15px rgba(34, 197, 94, 0.05);
+    box-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.2), inset 0 0 15px rgba(var(--color-primary-rgb), 0.05);
   }
 
   .pulse-ring {
@@ -79,7 +125,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1.5px;
-    background: conic-gradient(from 0deg, transparent, #22c55e, transparent, #22c55e, transparent);
+    background: conic-gradient(from 0deg, transparent, var(--color-primary-hex), transparent, var(--color-primary-hex), transparent);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -113,4 +159,24 @@
 
 @keyframes spinBorder {
   to { transform: rotate(360deg); }
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(12deg); }
+  75% { transform: rotate(-5deg); }
+}
+
+.animate-wave {
+  animation: wave 1.5s ease-in-out infinite;
+}
+
+@keyframes blinkLine {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.animate-blink-line {
+  animation: blinkLine 1.5s ease-in-out infinite;
 }

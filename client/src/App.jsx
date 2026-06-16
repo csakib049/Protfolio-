@@ -8,6 +8,7 @@ import AdminExperiences from './admin/AdminExperiences';
 import AdminSkills from './admin/AdminSkills';
 import AdminTestimonials from './admin/AdminTestimonials';
 import AdminMessages from './admin/AdminMessages';
+import AdminAchievements from './admin/AdminAchievements';
 import ProtectedRoute from './admin/ProtectedRoute';
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="skills" element={<AdminSkills />} />
         <Route path="testimonials" element={<AdminTestimonials />} />
         <Route path="messages" element={<AdminMessages />} />
+        <Route path="achievements" element={<AdminAchievements />} />
       </Route>
     </Routes>
   );

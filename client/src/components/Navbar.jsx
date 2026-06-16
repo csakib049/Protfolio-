@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const navLinks = ['About', 'Experience', 'Projects', 'Testimonials', 'Contact'];
+const navLinks = ['About', 'Experience', 'Projects', 'Achievements', 'Testimonials', 'Contact'];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -26,10 +26,8 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="text-xl font-bold tracking-tight">
-          <span className="text-primary">&lt;</span>
-          <span className="text-white">Dev</span>
-          <span className="text-primary">/&gt;</span>
+        <span className="text-lg md:text-xl font-bold tracking-tight text-white whitespace-nowrap">
+          Md. Sakib Chowdhury
         </span>
 
         <div className="hidden md:flex items-center gap-8">

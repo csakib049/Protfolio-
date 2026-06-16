@@ -10,6 +10,8 @@ import experienceRoutes from './routes/experiences.js';
 import skillRoutes from './routes/skills.js';
 import testimonialRoutes from './routes/testimonials.js';
 import messageRoutes from './routes/messages.js';
+import achievementRoutes from './routes/achievements.js';
+import settingsRoutes from './routes/settings.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -25,6 +27,8 @@ app.use('/api/experiences', experienceRoutes);
 app.use('/api/skills', skillRoutes);
 app.use('/api/testimonials', testimonialRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/achievements', achievementRoutes);
+app.use('/api/settings', settingsRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

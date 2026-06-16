@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         dark: '#030303',
-        primary: '#22c55e',
+        primary: 'rgb(var(--color-primary-rgb) / <alpha-value>)',
         surface: 'rgba(255,255,255,0.05)',
       },
       fontFamily: {

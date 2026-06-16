@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FolderGit2, Briefcase, Code2, MessageSquare, Star, LogOut } from 'lucide-react';
+import { LayoutDashboard, FolderGit2, Briefcase, Code2, MessageSquare, Star, Award, LogOut } from 'lucide-react';
 
 const sidebarLinks = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -8,6 +8,7 @@ const sidebarLinks = [
   { to: '/admin/dashboard/skills', label: 'Skills', icon: Code2 },
   { to: '/admin/dashboard/testimonials', label: 'Testimonials', icon: Star },
   { to: '/admin/dashboard/messages', label: 'Messages', icon: MessageSquare },
+  { to: '/admin/dashboard/achievements', label: 'Achievements', icon: Award },
 ];
 
 export default function AdminLayout() {
