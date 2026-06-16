@@ -43,8 +43,8 @@ export default function Hero() {
 
         <div className="mt-16 fade-in fade-in-delay-4 flex justify-center">
           <div className="relative">
-            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full glass-strong flex items-center justify-center">
-              <span className="text-4xl md:text-5xl">👨‍💻</span>
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full glass-strong overflow-hidden">
+              <img src="/sakib.jpg" alt="Sakib" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -inset-2 rounded-full border border-primary/30 pulse-ring" />
           </div>

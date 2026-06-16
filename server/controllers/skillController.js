@@ -6,12 +6,16 @@ export const getAll = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-  const item = await Skill.create(req.body);
+  const data = { ...req.body };
+  if (req.file) data.logo = `/uploads/${req.file.filename}`;
+  const item = await Skill.create(data);
   res.status(201).json(item);
 };
 
 export const update = async (req, res) => {
-  const item = await Skill.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  const data = { ...req.body };
+  if (req.file) data.logo = `/uploads/${req.file.filename}`;
+  const item = await Skill.findByIdAndUpdate(req.params.id, data, { new: true });
   if (!item) return res.status(404).json({ message: 'Not found' });
   res.json(item);
 };

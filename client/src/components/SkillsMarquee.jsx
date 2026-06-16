@@ -24,8 +24,15 @@ export default function SkillsMarquee() {
           {doubled.map((skill, i) => (
             <div
               key={`${skill._id}-${i}`}
-              className="glass rounded-full px-6 py-3 text-sm font-medium text-gray-300 whitespace-nowrap hover:text-primary transition-colors"
+              className="glass rounded-full px-6 py-3 flex items-center gap-3 text-sm font-medium text-gray-300 whitespace-nowrap hover:text-primary transition-colors"
             >
+              {skill.logo ? (
+                <img src={skill.logo} alt={skill.name} className="w-5 h-5 object-contain" />
+              ) : (
+                <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-[10px] text-primary font-bold">
+                  {skill.name.charAt(0).toUpperCase()}
+                </div>
+              )}
               {skill.name}
             </div>
           ))}

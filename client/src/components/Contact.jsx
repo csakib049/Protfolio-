@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Send, Mail, MapPin, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, Mail, MapPin, Phone, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import api from '@/api';
 
 export default function Contact() {
@@ -58,14 +58,21 @@ export default function Contact() {
               <Mail className="text-primary flex-shrink-0" size={22} />
               <div>
                 <p className="text-sm text-gray-400">Email</p>
-                <p className="text-sm font-medium">hello@example.com</p>
+                <p className="text-sm font-medium">csakib049@gmail.com</p>
               </div>
             </div>
             <div className="glass rounded-2xl p-5 flex items-center gap-4">
               <MapPin className="text-primary flex-shrink-0" size={22} />
               <div>
                 <p className="text-sm text-gray-400">Location</p>
-                <p className="text-sm font-medium">San Francisco, CA</p>
+                <p className="text-sm font-medium">Mirpur-2, Dhaka-1216</p>
+              </div>
+            </div>
+            <div className="glass rounded-2xl p-5 flex items-center gap-4">
+              <Phone className="text-primary flex-shrink-0" size={22} />
+              <div>
+                <p className="text-sm text-gray-400">Phone</p>
+                <p className="text-sm font-medium">+880 1823404469</p>
               </div>
             </div>
           </div>

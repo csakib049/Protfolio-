@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, X, Save, Loader2 } from 'lucide-react';
 import api from '@/api';
 
-const empty = { name: '', category: 'Frontend' };
+const empty = { name: '', category: 'Frontend', logo: '' };
 
 export default function AdminSkills() {
   const [items, setItems] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(empty);
+  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const load = async () => {
@@ -18,17 +19,32 @@ export default function AdminSkills() {
 
   useEffect(() => { load(); }, []);
 
-  const openCreate = () => { setForm(empty); setEditing(null); setShowForm(true); };
-  const openEdit = (item) => { setForm(item); setEditing(item._id); setShowForm(true); };
+  const openCreate = () => {
+    setForm(empty);
+    setFile(null);
+    setEditing(null);
+    setShowForm(true);
+  };
+
+  const openEdit = (item) => {
+    setForm(item);
+    setFile(null);
+    setEditing(item._id);
+    setShowForm(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const fd = new FormData();
+    fd.append('name', form.name);
+    fd.append('category', form.category);
+    if (file) fd.append('logo', file);
     try {
       if (editing) {
-        await api.put(`/skills/${editing}`, form);
+        await api.put(`/skills/${editing}`, fd);
       } else {
-        await api.post('/skills', form);
+        await api.post('/skills', fd);
       }
       setShowForm(false);
       load();
@@ -68,6 +84,7 @@ export default function AdminSkills() {
                   <option key={c} value={c} className="bg-dark">{c}</option>
                 ))}
               </select>
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
               <button type="submit" disabled={loading} className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50">
                 {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 {editing ? 'Update' : 'Create'}
@@ -80,6 +97,13 @@ export default function AdminSkills() {
       <div className="flex flex-wrap gap-3">
         {items.map((item) => (
           <div key={item._id} className="glass rounded-xl px-5 py-3 flex items-center gap-3 group">
+            {item.logo ? (
+              <img src={item.logo} alt={item.name} className="w-8 h-8 object-contain rounded" />
+            ) : (
+              <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-xs text-gray-500">
+                {item.name.charAt(0).toUpperCase()}
+              </div>
+            )}
             <div>
               <p className="text-sm font-medium">{item.name}</p>
               <p className="text-xs text-gray-500">{item.category}</p>
