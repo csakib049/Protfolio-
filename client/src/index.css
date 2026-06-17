@@ -48,6 +48,21 @@
   --color-primary-hex: #3b82f6;
 }
 
+.theme-cyprus {
+  --color-primary-rgb: 0 70 48;
+  --color-primary-hex: #004630;
+}
+
+.theme-burgundy {
+  --color-primary-rgb: 147 3 46;
+  --color-primary-hex: #93032e;
+}
+
+.theme-crayola-red {
+  --color-primary-rgb: 237 37 78;
+  --color-primary-hex: #ed254e;
+}
+
 @layer utilities {
   .glass {
     background: rgba(255, 255, 255, 0.05);
@@ -163,13 +178,14 @@
 
 @keyframes wave {
   0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  50% { transform: rotate(12deg); }
-  75% { transform: rotate(-5deg); }
+  5% { transform: rotate(-10deg); }
+  10% { transform: rotate(12deg); }
+  15% { transform: rotate(-5deg); }
+  20% { transform: rotate(0deg); }
 }
 
 .animate-wave {
-  animation: wave 1.5s ease-in-out infinite;
+  animation: wave 5s ease-in-out infinite;
 }
 
 @keyframes blinkLine {

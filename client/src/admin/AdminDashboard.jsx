@@ -13,6 +13,9 @@ const themes = [
   { id: 'pink', label: 'Pink', color: '#ec4899' },
   { id: 'violet', label: 'Violet', color: '#8b5cf6' },
   { id: 'blue', label: 'Blue', color: '#3b82f6' },
+  { id: 'cyprus', label: 'Cyprus', color: '#004630' },
+  { id: 'burgundy', label: 'Burgundy', color: '#93032e' },
+  { id: 'crayola-red', label: 'Red (Crayola)', color: '#ed254e' },
 ];
 
 export default function AdminDashboard() {
@@ -71,7 +74,7 @@ export default function AdminDashboard() {
         <p className="text-sm text-gray-400 mb-6">
           Choose a color theme for your portfolio website.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           {themes.map((t) => (
             <button
               key={t.id}

@@ -47,27 +47,25 @@ export default function Achievements() {
               key={item._id}
               className="reveal glass rounded-2xl p-6 hover:bg-white/[0.07] transition-all duration-300 group border border-white/5"
             >
-              <div className="flex items-start gap-4">
+              <div>
+                <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
+                {item.date && (
+                  <p className="text-xs text-gray-500 mb-3">{item.date}</p>
+                )}
                 {item.image ? (
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-16 h-16 rounded-xl object-cover shrink-0 group-hover:scale-110 transition-transform"
+                    className="w-full h-52 rounded-2xl object-cover group-hover:scale-[1.02] transition-transform mb-3"
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-xl bg-yellow-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                    <Award size={28} className="text-yellow-400" />
+                  <div className="w-full h-52 rounded-2xl bg-yellow-500/20 flex items-center justify-center group-hover:scale-[1.02] transition-transform mb-3">
+                    <Award size={48} className="text-yellow-400" />
                   </div>
                 )}
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
-                  {item.date && (
-                    <p className="text-xs text-gray-500 mb-2">{item.date}</p>
-                  )}
-                  {item.description && (
-                    <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
-                  )}
-                </div>
+                {item.description && (
+                  <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                )}
               </div>
             </div>
           ))}
