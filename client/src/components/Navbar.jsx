@@ -26,16 +26,20 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="text-lg md:text-xl font-bold tracking-tight text-white whitespace-nowrap">
+        <button onClick={() => window.open('/admin', '_blank')} className="text-lg md:text-xl font-bold tracking-tight text-white whitespace-nowrap hover:text-primary transition-colors">
           Md. Sakib Chowdhury
-        </span>
+        </button>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <button
               key={link}
               onClick={() => scrollTo(link)}
-              className="text-sm text-gray-400 hover:text-primary transition-colors"
+              className={`text-sm transition-all ${
+                i === navLinks.length - 1
+                  ? 'text-gray-400 hover:text-primary animate-glow'
+                  : 'text-gray-400 hover:text-primary'
+              }`}
             >
               {link}
             </button>

@@ -53,23 +53,23 @@ export default function Contact() {
         </div>
 
         <div className="grid md:grid-cols-5 gap-8">
-          <div className="md:col-span-2 reveal space-y-6">
-            <div className="glass rounded-2xl p-5 flex items-center gap-4">
-              <Mail className="text-primary flex-shrink-0" size={22} />
+          <div className="md:col-span-2 space-y-6">
+            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.07] transition-all duration-300 group">
+              <Mail className="text-primary flex-shrink-0 group-hover:scale-110 transition-transform" size={22} />
               <div>
                 <p className="text-sm text-gray-400">Email</p>
                 <p className="text-sm font-medium">csakib049@gmail.com</p>
               </div>
             </div>
-            <div className="glass rounded-2xl p-5 flex items-center gap-4">
-              <MapPin className="text-primary flex-shrink-0" size={22} />
+            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.07] transition-all duration-300 group" style={{ animationDelay: '100ms' }}>
+              <MapPin className="text-primary flex-shrink-0 group-hover:scale-110 transition-transform" size={22} />
               <div>
                 <p className="text-sm text-gray-400">Location</p>
                 <p className="text-sm font-medium">Mirpur-2, Dhaka-1216</p>
               </div>
             </div>
-            <div className="glass rounded-2xl p-5 flex items-center gap-4">
-              <Phone className="text-primary flex-shrink-0" size={22} />
+            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.07] transition-all duration-300 group" style={{ animationDelay: '200ms' }}>
+              <Phone className="text-primary flex-shrink-0 group-hover:scale-110 transition-transform" size={22} />
               <div>
                 <p className="text-sm text-gray-400">Phone</p>
                 <p className="text-sm font-medium">+880 1823404469</p>
@@ -86,7 +86,7 @@ export default function Contact() {
                 value={form.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
               />
               <input
                 type="email"
@@ -95,7 +95,7 @@ export default function Contact() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
               />
             </div>
             <input
@@ -104,7 +104,7 @@ export default function Contact() {
               placeholder="Subject"
               value={form.subject}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
             />
             <textarea
               name="message"
@@ -113,13 +113,13 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 transition-colors text-sm resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm resize-none"
             />
 
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all disabled:opacity-50"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-50"
             >
               {loading ? (
                 <Loader2 size={18} className="animate-spin" />

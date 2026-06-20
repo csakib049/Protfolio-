@@ -16,6 +16,8 @@ const themes = [
   { id: 'cyprus', label: 'Cyprus', color: '#004630' },
   { id: 'burgundy', label: 'Burgundy', color: '#93032e' },
   { id: 'crayola-red', label: 'Red (Crayola)', color: '#ed254e' },
+  { id: 'dracula', label: 'Dracula', color: '#ff79c6' },
+  { id: 'nord', label: 'Nord', color: '#88c0d0' },
 ];
 
 export default function AdminDashboard() {

@@ -1,17 +1,14 @@
-import { Code2, Lightbulb, Rocket, Sparkles, Zap, Shield } from 'lucide-react';
-import { useEffect, useRef } from 'react';
-
-const highlights = [
-  { icon: Code2, title: 'Clean Code', desc: 'Readable, maintainable, and well-structured code that scales.' },
-  { icon: Lightbulb, title: 'Innovation', desc: 'Modern solutions leveraging cutting-edge technologies.' },
-  { icon: Rocket, title: 'Performance', desc: 'Optimized apps with fast load times and smooth interactions.' },
-  { icon: Zap, title: 'Speed', desc: 'Rapid development without compromising on quality.' },
-  { icon: Shield, title: 'Security', desc: 'Best practices for secure and reliable applications.' },
-  { icon: Sparkles, title: 'Design', desc: 'Pixel-perfect interfaces with great user experience.' },
-];
+import { useEffect, useRef, useState } from 'react';
+import api from '@/api';
+import * as Icons from 'lucide-react';
 
 export default function About() {
+  const [items, setItems] = useState([]);
   const ref = useRef(null);
+
+  useEffect(() => {
+    api.get('/about').then(({ data }) => setItems(data)).catch(() => {});
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -30,7 +27,9 @@ export default function About() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [items]);
+
+  if (!items.length) return null;
 
   return (
     <section id="about" className="py-24 relative" ref={ref}>
@@ -43,16 +42,16 @@ export default function About() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {highlights.map((item, i) => {
-            const Icon = item.icon;
+          {items.map((item, i) => {
+            const Icon = Icons[item.icon] || Icons.Sparkles;
             return (
               <div
-                key={i}
+                key={item._id}
                 className="reveal glass rounded-2xl p-6 hover:bg-white/[0.07] transition-all duration-300 group"
               >
                 <Icon className="text-primary mb-4 group-hover:scale-110 transition-transform" size={28} />
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
               </div>
             );
           })}
