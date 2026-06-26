@@ -82,12 +82,12 @@ export default function AdminProjects() {
               <button onClick={() => setShowForm(false)}><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} placeholder="Title" required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <textarea value={form.description} onChange={(e) => setForm({...form, description: e.target.value})} placeholder="Description" rows={3} required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm resize-none" />
-              <input value={form.tags} onChange={(e) => setForm({...form, tags: e.target.value})} placeholder="Tags (comma separated)" className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <input value={form.github} onChange={(e) => setForm({...form, github: e.target.value})} placeholder="GitHub URL" className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <input value={form.live} onChange={(e) => setForm({...form, live: e.target.value})} placeholder="Live Demo URL" className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+              <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} placeholder="Title" required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <textarea value={form.description} onChange={(e) => setForm({...form, description: e.target.value})} placeholder="Description" rows={3} required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none" />
+              <input value={form.tags} onChange={(e) => setForm({...form, tags: e.target.value})} placeholder="Tags (comma separated)" className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <input value={form.github} onChange={(e) => setForm({...form, github: e.target.value})} placeholder="GitHub URL" className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <input value={form.live} onChange={(e) => setForm({...form, live: e.target.value})} placeholder="Live Demo URL" className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
               <button type="submit" disabled={loading} className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50">
                 {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 {editing ? 'Update' : 'Create'}
@@ -100,15 +100,15 @@ export default function AdminProjects() {
       <div className="glass rounded-2xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/5">
-              <th className="text-left py-4 px-5 text-gray-400 font-medium">Title</th>
-              <th className="text-left py-4 px-5 text-gray-400 font-medium hidden md:table-cell">Tags</th>
-              <th className="text-right py-4 px-5 text-gray-400 font-medium">Actions</th>
+            <tr className="border-b border-glass/5">
+              <th className="text-left py-4 px-5 text-muted font-medium">Title</th>
+              <th className="text-left py-4 px-5 text-muted font-medium hidden md:table-cell">Tags</th>
+              <th className="text-right py-4 px-5 text-muted font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
-              <tr key={item._id} className="border-b border-white/5 hover:bg-white/[0.02]">
+              <tr key={item._id} className="border-b border-glass/5 hover:bg-glass/5">
                 <td className="py-4 px-5">{item.title}</td>
                 <td className="py-4 px-5 hidden md:table-cell">
                   <div className="flex gap-1.5 flex-wrap">
@@ -124,7 +124,7 @@ export default function AdminProjects() {
               </tr>
             ))}
             {!items.length && (
-              <tr><td colSpan={3} className="py-12 text-center text-gray-500">No projects yet</td></tr>
+              <tr><td colSpan={3} className="py-12 text-center text-muted">No projects yet</td></tr>
             )}
           </tbody>
         </table>

@@ -45,9 +45,9 @@ export default function Projects() {
           {projects.map((project, i) => (
             <div
               key={project._id}
-              className="reveal group glass rounded-2xl overflow-hidden hover:bg-white/[0.07] transition-all duration-500"
+              className="reveal group glass rounded-2xl overflow-hidden hover:bg-glass/5 transition-all duration-500"
             >
-              <div className="relative h-48 overflow-hidden bg-white/5">
+              <div className="relative h-48 overflow-hidden bg-glass/5">
                 {project.image ? (
                   <img
                     src={project.image}
@@ -75,7 +75,7 @@ export default function Projects() {
 
               <div className="p-5">
                 <h3 className="text-lg font-semibold mb-2">{project.title}</h3>
-                <p className="text-sm text-gray-400 mb-4 line-clamp-2">{project.description}</p>
+                <p className="text-sm text-muted mb-4 line-clamp-2">{project.description}</p>
                 {project.tags?.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (

@@ -45,12 +45,12 @@ export default function Achievements() {
           {items.map((item, i) => (
             <div
               key={item._id}
-              className="reveal glass rounded-2xl p-6 hover:bg-white/[0.07] transition-all duration-300 group border border-white/5"
+              className="reveal glass rounded-2xl p-6 hover:bg-glass/5 transition-all duration-300 group border border-glass/5"
             >
               <div>
                 <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
                 {item.date && (
-                  <p className="text-xs text-gray-500 mb-3">{item.date}</p>
+                  <p className="text-xs text-muted mb-3">{item.date}</p>
                 )}
                 {item.image ? (
                   <img
@@ -64,13 +64,13 @@ export default function Achievements() {
                   </div>
                 )}
                 {item.description && (
-                  <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                  <p className="text-sm text-muted leading-relaxed">{item.description}</p>
                 )}
               </div>
             </div>
           ))}
           {!items.length && (
-            <div className="md:col-span-2 text-center py-16 text-gray-500 reveal">
+            <div className="md:col-span-2 text-center py-16 text-muted reveal">
               <Award size={48} className="mx-auto mb-4 opacity-30" />
               <p>No achievements yet</p>
             </div>

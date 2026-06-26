@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========== DARK ACCENT THEMES ========== */
+
 :root,
 .theme-green {
   --color-bg-rgb: 3 3 3;
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 34 197 94;
   --color-primary-hex: #22c55e;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-cyan {
@@ -15,6 +20,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 6 182 212;
   --color-primary-hex: #06b6d4;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-maroon {
@@ -22,6 +30,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 190 18 60;
   --color-primary-hex: #be123c;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-orange {
@@ -29,6 +40,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 249 115 22;
   --color-primary-hex: #f97316;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-red {
@@ -36,6 +50,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 239 68 68;
   --color-primary-hex: #ef4444;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-purple {
@@ -43,6 +60,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 168 85 247;
   --color-primary-hex: #a855f7;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-pink {
@@ -50,6 +70,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 236 72 153;
   --color-primary-hex: #ec4899;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-violet {
@@ -57,6 +80,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 139 92 246;
   --color-primary-hex: #8b5cf6;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-blue {
@@ -64,6 +90,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 59 130 246;
   --color-primary-hex: #3b82f6;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-cyprus {
@@ -71,6 +100,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 0 70 48;
   --color-primary-hex: #004630;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-burgundy {
@@ -78,6 +110,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 147 3 46;
   --color-primary-hex: #93032e;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-crayola-red {
@@ -85,6 +120,9 @@
   --color-surface-rgb: 255 255 255;
   --color-primary-rgb: 237 37 78;
   --color-primary-hex: #ed254e;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 255 255 255;
+  --color-text-muted-rgb: 156 163 175;
 }
 
 .theme-dracula {
@@ -92,6 +130,9 @@
   --color-surface-rgb: 68 71 90;
   --color-primary-rgb: 255 121 198;
   --color-primary-hex: #ff79c6;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 248 248 242;
+  --color-text-muted-rgb: 98 114 164;
   --dracula-bg: #282a36;
   --dracula-current-line: #44475a;
   --dracula-fg: #f8f8f2;
@@ -110,6 +151,9 @@
   --color-surface-rgb: 59 66 82;
   --color-primary-rgb: 136 192 208;
   --color-primary-hex: #88c0d0;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 216 222 233;
+  --color-text-muted-rgb: 76 86 106;
   --nord0: #2e3440;
   --nord1: #3b4252;
   --nord2: #434c5e;
@@ -128,33 +172,200 @@
   --nord15: #b48ead;
 }
 
+/* ========== LIGHT THEMES ========== */
 
+.theme-light-green {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 22 163 74;
+  --color-primary-hex: #16a34a;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-cyan {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 8 145 178;
+  --color-primary-hex: #0891b2;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-maroon {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 159 18 57;
+  --color-primary-hex: #9f1239;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-orange {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 234 88 12;
+  --color-primary-hex: #ea580c;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-red {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 220 38 38;
+  --color-primary-hex: #dc2626;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-purple {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 147 51 234;
+  --color-primary-hex: #9333ea;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-pink {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 219 39 119;
+  --color-primary-hex: #db2777;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-violet {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 124 58 237;
+  --color-primary-hex: #7c3aed;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+.theme-light-blue {
+  --color-bg-rgb: 248 250 252;
+  --color-surface-rgb: 255 255 255;
+  --color-primary-rgb: 37 99 235;
+  --color-primary-hex: #2563eb;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 15 23 42;
+  --color-text-muted-rgb: 100 116 139;
+}
+
+/* ========== POPULAR PRESETS ========== */
+
+.theme-solarized-dark {
+  --color-bg-rgb: 0 43 54;
+  --color-surface-rgb: 7 54 66;
+  --color-primary-rgb: 42 161 152;
+  --color-primary-hex: #2aa198;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 147 161 161;
+  --color-text-muted-rgb: 88 110 117;
+}
+
+.theme-solarized-light {
+  --color-bg-rgb: 253 246 227;
+  --color-surface-rgb: 238 232 213;
+  --color-primary-rgb: 38 139 210;
+  --color-primary-hex: #268bd2;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 88 110 117;
+  --color-text-muted-rgb: 147 161 161;
+}
+
+.theme-monokai {
+  --color-bg-rgb: 39 40 34;
+  --color-surface-rgb: 56 56 48;
+  --color-primary-rgb: 166 226 46;
+  --color-primary-hex: #a6e22e;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 248 248 242;
+  --color-text-muted-rgb: 117 113 94;
+}
+
+.theme-one-dark {
+  --color-bg-rgb: 40 44 52;
+  --color-surface-rgb: 53 59 69;
+  --color-primary-rgb: 97 175 239;
+  --color-primary-hex: #61afef;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 171 178 191;
+  --color-text-muted-rgb: 92 99 112;
+}
+
+.theme-tokyo-night {
+  --color-bg-rgb: 26 27 38;
+  --color-surface-rgb: 36 40 59;
+  --color-primary-rgb: 122 162 247;
+  --color-primary-hex: #7aa2f7;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 169 177 214;
+  --color-text-muted-rgb: 86 95 137;
+}
+
+.theme-catppuccin-mocha {
+  --color-bg-rgb: 30 30 46;
+  --color-surface-rgb: 49 50 68;
+  --color-primary-rgb: 203 166 247;
+  --color-primary-hex: #cba6f7;
+  --color-glass-rgb: 255 255 255;
+  --color-text-rgb: 205 214 244;
+  --color-text-muted-rgb: 147 153 178;
+}
+
+.theme-catppuccin-latte {
+  --color-bg-rgb: 239 241 245;
+  --color-surface-rgb: 230 233 239;
+  --color-primary-rgb: 136 57 239;
+  --color-primary-hex: #8839ef;
+  --color-glass-rgb: 0 0 0;
+  --color-text-rgb: 76 79 105;
+  --color-text-muted-rgb: 156 160 176;
+}
+
+/* ========== GLOBAL TRANSITION ========== */
 
 html {
-  transition: background-color 0.4s ease;
+  color: rgb(var(--color-text-rgb));
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
+
+/* ========== UTILITY CLASSES ========== */
 
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgb(var(--color-glass-rgb) / 0.05);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgb(var(--color-glass-rgb) / 0.08);
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgb(var(--color-glass-rgb) / 0.08);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgb(var(--color-glass-rgb) / 0.12);
   }
 
   .glow-text {
-    text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.3), 0 0 40px rgba(var(--color-primary-rgb), 0.15);
+    text-shadow: 0 0 20px rgb(var(--color-primary-rgb) / 0.3), 0 0 40px rgb(var(--color-primary-rgb) / 0.15);
   }
 
   .glow-border {
-    box-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.2), inset 0 0 15px rgba(var(--color-primary-rgb), 0.05);
+    box-shadow: 0 0 15px rgb(var(--color-primary-rgb) / 0.2), inset 0 0 15px rgb(var(--color-primary-rgb) / 0.05);
   }
 
   .pulse-ring {
@@ -269,10 +480,25 @@ html {
 }
 
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(var(--color-primary-rgb), 0.3), 0 0 20px rgba(var(--color-primary-rgb), 0.1); }
-  50% { box-shadow: 0 0 16px rgba(var(--color-primary-rgb), 0.6), 0 0 40px rgba(var(--color-primary-rgb), 0.2); }
+  0%, 100% { box-shadow: 0 0 8px rgb(var(--color-primary-rgb) / 0.3), 0 0 20px rgb(var(--color-primary-rgb) / 0.1); }
+  50% { box-shadow: 0 0 16px rgb(var(--color-primary-rgb) / 0.6), 0 0 40px rgb(var(--color-primary-rgb) / 0.2); }
 }
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes contact-glow {
+  0%, 100% {
+    box-shadow: 0 0 6px rgb(var(--color-primary-rgb) / 0.3), 0 0 16px rgb(var(--color-primary-rgb) / 0.1);
+    border-color: rgb(var(--color-primary-rgb) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 14px rgb(var(--color-primary-rgb) / 0.6), 0 0 32px rgb(var(--color-primary-rgb) / 0.25);
+    border-color: rgb(var(--color-primary-rgb) / 0.7);
+  }
+}
+
+.animate-contact-glow {
+  animation: contact-glow 2s ease-in-out infinite;
 }

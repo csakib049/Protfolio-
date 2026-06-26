@@ -41,7 +41,7 @@ export default function Experience() {
         </div>
 
         <div className="relative">
-          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-white/10" />
+          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-glass/10" />
 
           {experiences.map((exp, i) => (
             <div key={exp._id} className={`reveal flex gap-6 pb-12 last:pb-0`}>
@@ -49,16 +49,16 @@ export default function Experience() {
                 {exp.isCurrentRole ? (
                   <div className="w-2.5 h-2.5 rounded-full bg-primary mt-2 pulse-ring" />
                 ) : (
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/20 mt-2" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-glass/20 mt-2" />
                 )}
               </div>
 
               <div className="glass rounded-2xl p-6 flex-1">
                 <span className="text-xs text-primary font-mono">{exp.period}</span>
                 <h3 className="text-xl font-semibold mt-1">{exp.role}</h3>
-                <p className="text-sm text-gray-400 mt-0.5">{exp.company}</p>
+                <p className="text-sm text-muted mt-0.5">{exp.company}</p>
                 {exp.description && (
-                  <p className="text-sm text-gray-500 mt-3 leading-relaxed">{exp.description}</p>
+                  <p className="text-sm text-muted mt-3 leading-relaxed">{exp.description}</p>
                 )}
               </div>
             </div>

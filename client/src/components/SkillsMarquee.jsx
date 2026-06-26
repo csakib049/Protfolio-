@@ -23,7 +23,7 @@ export default function SkillsMarquee() {
           {skills.map((skill) => (
             <div
               key={skill._id}
-              className="glass rounded-full px-6 py-3 flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-primary transition-colors"
+              className="glass rounded-full px-6 py-3 flex items-center gap-3 text-sm font-medium text-muted hover:text-primary transition-colors"
             >
               {skill.logo ? (
                 <img src={skill.logo} alt={skill.name} className="w-5 h-5 object-contain" />

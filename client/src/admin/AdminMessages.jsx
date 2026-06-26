@@ -37,14 +37,14 @@ export default function AdminMessages() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-1">
                   <h3 className="font-semibold">{item.name}</h3>
-                  <span className="text-xs text-gray-500">{new Date(item.createdAt).toLocaleDateString()}</span>
+                  <span className="text-xs text-muted">{new Date(item.createdAt).toLocaleDateString()}</span>
                   {!item.read && (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-primary/20 text-primary">New</span>
                   )}
                 </div>
-                <p className="text-sm text-gray-400">{item.email}</p>
-                {item.subject && <p className="text-sm text-gray-300 mt-2 font-medium">{item.subject}</p>}
-                <p className="text-sm text-gray-400 mt-2 whitespace-pre-wrap">{item.message}</p>
+                <p className="text-sm text-muted">{item.email}</p>
+                {item.subject && <p className="text-sm text-muted mt-2 font-medium">{item.subject}</p>}
+                <p className="text-sm text-muted mt-2 whitespace-pre-wrap">{item.message}</p>
               </div>
               <div className="flex gap-2 flex-shrink-0">
                 {!item.read && (
@@ -60,7 +60,7 @@ export default function AdminMessages() {
           </div>
         ))}
         {!items.length && (
-          <div className="text-center py-16 text-gray-500">
+          <div className="text-center py-16 text-muted">
             <Mail size={40} className="mx-auto mb-4 opacity-30" />
             <p>No messages yet</p>
           </div>

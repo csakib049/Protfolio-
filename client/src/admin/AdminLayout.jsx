@@ -22,8 +22,8 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-dark flex">
-      <aside className="w-64 glass border-r border-white/5 p-4 flex flex-col flex-shrink-0">
-        <div className="text-center py-6 border-b border-white/5 mb-4">
+      <aside className="w-64 glass border-r border-glass/5 p-4 flex flex-col flex-shrink-0">
+        <div className="text-center py-6 border-b border-glass/5 mb-4">
           <span className="text-lg font-bold">
             <span className="text-primary">&lt;</span>Admin<span className="text-primary">/&gt;</span>
           </span>
@@ -39,7 +39,7 @@ export default function AdminLayout() {
                 `flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm transition-all ${
                   isActive
                     ? 'bg-primary/10 text-primary'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    : 'text-muted hover:text-main hover:bg-glass/5'
                 }`
               }
             >
@@ -51,7 +51,7 @@ export default function AdminLayout() {
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-gray-400 hover:text-red-400 hover:bg-white/5 transition-all mt-2"
+          className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm text-muted hover:text-red-400 hover:bg-glass/5 transition-all mt-2"
         >
           <LogOut size={18} />
           Logout

@@ -47,11 +47,11 @@ export default function About() {
             return (
               <div
                 key={item._id}
-                className="reveal glass rounded-2xl p-6 hover:bg-white/[0.07] transition-all duration-300 group"
+                className="reveal glass rounded-2xl p-6 hover:bg-glass/5 transition-all duration-300 group"
               >
                 <Icon className="text-primary mb-4 group-hover:scale-110 transition-transform" size={28} />
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                <p className="text-sm text-muted leading-relaxed">{item.description}</p>
               </div>
             );
           })}

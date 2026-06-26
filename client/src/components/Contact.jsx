@@ -54,24 +54,24 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-5 gap-8">
           <div className="md:col-span-2 space-y-6">
-            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.07] transition-all duration-300 group">
+            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-glass/5 transition-all duration-300 group">
               <Mail className="text-primary flex-shrink-0 group-hover:scale-110 transition-transform" size={22} />
               <div>
-                <p className="text-sm text-gray-400">Email</p>
+                <p className="text-sm text-muted">Email</p>
                 <p className="text-sm font-medium">csakib049@gmail.com</p>
               </div>
             </div>
-            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.07] transition-all duration-300 group" style={{ animationDelay: '100ms' }}>
+            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-glass/5 transition-all duration-300 group" style={{ animationDelay: '100ms' }}>
               <MapPin className="text-primary flex-shrink-0 group-hover:scale-110 transition-transform" size={22} />
               <div>
-                <p className="text-sm text-gray-400">Location</p>
+                <p className="text-sm text-muted">Location</p>
                 <p className="text-sm font-medium">Mirpur-2, Dhaka-1216</p>
               </div>
             </div>
-            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.07] transition-all duration-300 group" style={{ animationDelay: '200ms' }}>
+            <div className="reveal glass rounded-2xl p-5 flex items-center gap-4 hover:bg-glass/5 transition-all duration-300 group" style={{ animationDelay: '200ms' }}>
               <Phone className="text-primary flex-shrink-0 group-hover:scale-110 transition-transform" size={22} />
               <div>
-                <p className="text-sm text-gray-400">Phone</p>
+                <p className="text-sm text-muted">Phone</p>
                 <p className="text-sm font-medium">+880 1823404469</p>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function Contact() {
                 value={form.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
               />
               <input
                 type="email"
@@ -95,7 +95,7 @@ export default function Contact() {
                 value={form.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
               />
             </div>
             <input
@@ -104,7 +104,7 @@ export default function Contact() {
               placeholder="Subject"
               value={form.subject}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm"
             />
             <textarea
               name="message"
@@ -113,7 +113,7 @@ export default function Contact() {
               value={form.message}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 focus:scale-[1.02] transition-all duration-300 text-sm resize-none"
             />
 
             <button

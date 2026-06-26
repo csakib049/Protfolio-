@@ -48,7 +48,7 @@ export default function Testimonials() {
         <div className="reveal glass rounded-3xl p-8 md:p-12 relative">
           <Quote className="text-primary/20 absolute top-6 right-8" size={60} />
 
-          <p className="text-lg text-gray-300 leading-relaxed mb-8 italic">
+          <p className="text-lg text-muted leading-relaxed mb-8 italic">
             "{t.content}"
           </p>
 
@@ -62,18 +62,18 @@ export default function Testimonials() {
             </div>
             <div>
               <h4 className="font-semibold">{t.name}</h4>
-              {t.role && <p className="text-sm text-gray-400">{t.role}</p>}
+              {t.role && <p className="text-sm text-muted">{t.role}</p>}
             </div>
           </div>
 
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/5">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-glass/5">
             <div className="flex gap-2">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`w-2 h-2 rounded-full transition-all ${
-                    i === current ? 'bg-primary w-6' : 'bg-white/20'
+                    i === current ? 'bg-primary w-6' : 'bg-glass/20'
                   }`}
                 />
               ))}

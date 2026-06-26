@@ -31,7 +31,7 @@ export default function AdminLogin() {
         <div className="text-center mb-8">
           <div className="text-3xl mb-2">🔐</div>
           <h1 className="text-xl font-bold">Admin Login</h1>
-          <p className="text-sm text-gray-400 mt-1">Sign in to manage your portfolio</p>
+          <p className="text-sm text-muted mt-1">Sign in to manage your portfolio</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -41,7 +41,7 @@ export default function AdminLogin() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm"
+            className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
           />
           <input
             type="password"
@@ -49,7 +49,7 @@ export default function AdminLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm"
+            className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
           />
 
           {error && (

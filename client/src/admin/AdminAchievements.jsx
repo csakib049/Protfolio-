@@ -90,29 +90,29 @@ export default function AdminAchievements() {
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
                 placeholder="Achievement title"
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
               />
               <input
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
                 placeholder="Date (e.g. 2024)"
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
               />
               <textarea
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 placeholder="Description (optional)"
                 rows={4}
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none"
               />
               <input
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}
                 accept="image/*"
-                className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                className="w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
               />
               {editing && form.image && !file && (
-                <div className="flex items-center gap-3 text-sm text-gray-400">
+                <div className="flex items-center gap-3 text-sm text-muted">
                   <img src={form.image} alt="Current" className="w-16 h-12 rounded-lg object-cover" />
                   <span>Current image</span>
                 </div>
@@ -132,7 +132,7 @@ export default function AdminAchievements() {
 
       <div className="space-y-4">
         {items.map((item) => (
-          <div key={item._id} className="glass rounded-2xl p-6 group border border-white/5">
+          <div key={item._id} className="glass rounded-2xl p-6 group border border-glass/5">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-start gap-4">
                 {item.image ? (
@@ -148,8 +148,8 @@ export default function AdminAchievements() {
                 )}
                 <div>
                   <h3 className="font-semibold">{item.title}</h3>
-                  {item.date && <p className="text-xs text-gray-500 mt-0.5">{item.date}</p>}
-                  {item.description && <p className="text-sm text-gray-400 mt-2">{item.description}</p>}
+                  {item.date && <p className="text-xs text-muted mt-0.5">{item.date}</p>}
+                  {item.description && <p className="text-sm text-muted mt-2">{item.description}</p>}
                 </div>
               </div>
               <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
@@ -170,7 +170,7 @@ export default function AdminAchievements() {
           </div>
         ))}
         {!items.length && (
-          <div className="text-center py-16 text-gray-500">
+          <div className="text-center py-16 text-muted">
             <Award size={40} className="mx-auto mb-4 opacity-30" />
             <p>No achievements yet</p>
           </div>

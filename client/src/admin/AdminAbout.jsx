@@ -67,9 +67,9 @@ export default function AdminAbout() {
               <button onClick={() => setShowForm(false)}><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} placeholder="Title" required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <textarea value={form.description} onChange={(e) => setForm({...form, description: e.target.value})} placeholder="Description" rows={3} required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm resize-none" />
-              <select value={form.icon} onChange={(e) => setForm({...form, icon: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-primary/50 text-sm">
+              <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} placeholder="Title" required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <textarea value={form.description} onChange={(e) => setForm({...form, description: e.target.value})} placeholder="Description" rows={3} required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none" />
+              <select value={form.icon} onChange={(e) => setForm({...form, icon: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main focus:outline-none focus:border-primary/50 text-sm">
                 {iconOptions.map((icon) => (
                   <option key={icon} value={icon} className="bg-dark">{icon}</option>
                 ))}
@@ -86,21 +86,21 @@ export default function AdminAbout() {
       <div className="glass rounded-2xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-white/5">
-              <th className="text-left py-4 px-5 text-gray-400 font-medium">Icon</th>
-              <th className="text-left py-4 px-5 text-gray-400 font-medium">Title</th>
-              <th className="text-left py-4 px-5 text-gray-400 font-medium hidden md:table-cell">Description</th>
-              <th className="text-right py-4 px-5 text-gray-400 font-medium">Actions</th>
+            <tr className="border-b border-glass/5">
+              <th className="text-left py-4 px-5 text-muted font-medium">Icon</th>
+              <th className="text-left py-4 px-5 text-muted font-medium">Title</th>
+              <th className="text-left py-4 px-5 text-muted font-medium hidden md:table-cell">Description</th>
+              <th className="text-right py-4 px-5 text-muted font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
-              <tr key={item._id} className="border-b border-white/5 hover:bg-white/[0.02]">
+              <tr key={item._id} className="border-b border-glass/5 hover:bg-glass/5">
                 <td className="py-4 px-5">
-                  <span className="px-2 py-1 rounded bg-white/5 text-xs font-mono text-primary">{item.icon}</span>
+                  <span className="px-2 py-1 rounded bg-glass/5 text-xs font-mono text-primary">{item.icon}</span>
                 </td>
                 <td className="py-4 px-5 font-medium">{item.title}</td>
-                <td className="py-4 px-5 hidden md:table-cell text-gray-400 max-w-xs truncate">{item.description}</td>
+                <td className="py-4 px-5 hidden md:table-cell text-muted max-w-xs truncate">{item.description}</td>
                 <td className="py-4 px-5 text-right">
                   <button onClick={() => openEdit(item)} className="p-2 hover:text-primary transition-colors"><Pencil size={16} /></button>
                   <button onClick={() => handleDelete(item._id)} className="p-2 hover:text-red-400 transition-colors"><Trash2 size={16} /></button>
@@ -108,7 +108,7 @@ export default function AdminAbout() {
               </tr>
             ))}
             {!items.length && (
-              <tr><td colSpan={4} className="py-12 text-center text-gray-500">No highlights yet</td></tr>
+              <tr><td colSpan={4} className="py-12 text-center text-muted">No highlights yet</td></tr>
             )}
           </tbody>
         </table>

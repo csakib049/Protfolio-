@@ -26,7 +26,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <button onClick={() => window.open('/admin', '_blank')} className="text-lg md:text-xl font-bold tracking-tight text-white whitespace-nowrap hover:text-primary transition-colors">
+        <button onClick={() => window.open('/admin', '_blank')} className="text-lg md:text-xl font-bold tracking-tight text-main whitespace-nowrap hover:text-primary transition-colors">
           Md. Sakib Chowdhury
         </button>
 
@@ -37,8 +37,8 @@ export default function Navbar() {
               onClick={() => scrollTo(link)}
               className={`text-sm transition-all ${
                 i === navLinks.length - 1
-                  ? 'text-gray-400 hover:text-primary animate-glow'
-                  : 'text-gray-400 hover:text-primary'
+                  ? 'text-primary font-medium px-4 py-1.5 rounded-full border border-primary/40 hover:border-primary hover:bg-primary/10 animate-contact-glow'
+                  : 'text-muted hover:text-primary'
               }`}
             >
               {link}
@@ -47,7 +47,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden text-main p-2"
           onClick={() => setOpen(!open)}
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -55,13 +55,13 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden glass border-t border-white/5">
+        <div className="md:hidden glass border-t border-glass/5">
           <div className="flex flex-col px-6 py-4 gap-3">
             {navLinks.map((link) => (
               <button
                 key={link}
                 onClick={() => scrollTo(link)}
-                className="text-sm text-gray-400 hover:text-primary transition-colors text-left py-2"
+                className="text-sm text-muted hover:text-primary transition-colors text-left py-2"
               >
                 {link}
               </button>

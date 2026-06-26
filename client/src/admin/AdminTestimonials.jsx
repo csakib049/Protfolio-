@@ -68,10 +68,10 @@ export default function AdminTestimonials() {
               <button onClick={() => setShowForm(false)}><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} placeholder="Name" required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <input value={form.role} onChange={(e) => setForm({...form, role: e.target.value})} placeholder="Role (optional)" className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <textarea value={form.content} onChange={(e) => setForm({...form, content: e.target.value})} placeholder="Testimonial content" rows={4} required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm resize-none" />
-              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+              <input value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} placeholder="Name" required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <input value={form.role} onChange={(e) => setForm({...form, role: e.target.value})} placeholder="Role (optional)" className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <textarea value={form.content} onChange={(e) => setForm({...form, content: e.target.value})} placeholder="Testimonial content" rows={4} required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none" />
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
               <button type="submit" disabled={loading} className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50">
                 {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 {editing ? 'Update' : 'Create'}
@@ -84,7 +84,7 @@ export default function AdminTestimonials() {
       <div className="grid md:grid-cols-2 gap-5">
         {items.map((item) => (
           <div key={item._id} className="glass rounded-2xl p-6 group">
-            <p className="text-sm text-gray-300 italic mb-4">"{item.content}"</p>
+            <p className="text-sm text-muted italic mb-4">"{item.content}"</p>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full glass-strong flex items-center justify-center text-sm">
@@ -92,7 +92,7 @@ export default function AdminTestimonials() {
                 </div>
                 <div>
                   <p className="text-sm font-medium">{item.name}</p>
-                  {item.role && <p className="text-xs text-gray-500">{item.role}</p>}
+                  {item.role && <p className="text-xs text-muted">{item.role}</p>}
                 </div>
               </div>
               <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
@@ -103,7 +103,7 @@ export default function AdminTestimonials() {
           </div>
         ))}
         {!items.length && (
-          <div className="md:col-span-2 text-center py-12 text-gray-500">No testimonials yet</div>
+          <div className="md:col-span-2 text-center py-12 text-muted">No testimonials yet</div>
         )}
       </div>
     </div>

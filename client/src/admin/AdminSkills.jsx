@@ -78,13 +78,13 @@ export default function AdminSkills() {
               <button onClick={() => setShowForm(false)}><X size={20} /></button>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} placeholder="Skill name" required className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-primary/50 text-sm" />
-              <select value={form.category} onChange={(e) => setForm({...form, category: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-primary/50 text-sm">
+              <input value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} placeholder="Skill name" required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
+              <select value={form.category} onChange={(e) => setForm({...form, category: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main focus:outline-none focus:border-primary/50 text-sm">
                 {['Frontend', 'Backend', 'Database', 'DevOps', 'Tools', 'Other'].map((c) => (
                   <option key={c} value={c} className="bg-dark">{c}</option>
                 ))}
               </select>
-              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
+              <input type="file" onChange={(e) => setFile(e.target.files[0])} accept="image/*" className="w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20" />
               <button type="submit" disabled={loading} className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50">
                 {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                 {editing ? 'Update' : 'Create'}
@@ -100,13 +100,13 @@ export default function AdminSkills() {
             {item.logo ? (
               <img src={item.logo} alt={item.name} className="w-8 h-8 object-contain rounded" />
             ) : (
-              <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center text-xs text-gray-500">
+              <div className="w-8 h-8 rounded bg-glass/5 flex items-center justify-center text-xs text-muted">
                 {item.name.charAt(0).toUpperCase()}
               </div>
             )}
             <div>
               <p className="text-sm font-medium">{item.name}</p>
-              <p className="text-xs text-gray-500">{item.category}</p>
+              <p className="text-xs text-muted">{item.category}</p>
             </div>
             <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
               <button onClick={() => openEdit(item)} className="p-1.5 hover:text-primary transition-colors"><Pencil size={14} /></button>
@@ -115,7 +115,7 @@ export default function AdminSkills() {
           </div>
         ))}
         {!items.length && (
-          <p className="text-gray-500 w-full text-center py-12">No skills yet</p>
+          <p className="text-muted w-full text-center py-12">No skills yet</p>
         )}
       </div>
     </div>

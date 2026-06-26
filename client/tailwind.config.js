@@ -6,7 +6,9 @@ export default {
       colors: {
         dark: 'rgb(var(--color-bg-rgb))',
         primary: 'rgb(var(--color-primary-rgb) / <alpha-value>)',
-        surface: 'rgba(255,255,255,0.05)',
+        main: 'rgb(var(--color-text-rgb))',
+        muted: 'rgb(var(--color-text-muted-rgb))',
+        glass: 'rgb(var(--color-glass-rgb) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
