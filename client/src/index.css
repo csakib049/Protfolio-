@@ -338,9 +338,17 @@
 
 /* ========== GLOBAL TRANSITION ========== */
 
+:root {
+  --font-sans: Inter;
+}
+
 html {
   color: rgb(var(--color-text-rgb));
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+html.font-source {
+  --font-sans: 'Source Code Pro';
 }
 
 /* ========== UTILITY CLASSES ========== */

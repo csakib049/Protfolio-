@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check } from 'lucide-react';
+import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check, Type } from 'lucide-react';
 import api from '@/api';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -38,7 +38,7 @@ const themes = [
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState([]);
-  const { theme: activeTheme, updateTheme } = useTheme();
+  const { theme: activeTheme, updateTheme, font: activeFont, updateFont } = useTheme();
   const [updating, setUpdating] = useState(null);
 
   useEffect(() => {
@@ -127,6 +127,40 @@ export default function AdminDashboard() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      <div className="glass rounded-2xl p-8 mt-8">
+        <div className="flex items-center gap-3 mb-6">
+          <Type size={24} className="text-primary" />
+          <h2 className="text-lg font-semibold">Font Settings</h2>
+        </div>
+        <p className="text-sm text-muted mb-6">
+          Choose a font style for your portfolio website.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {[
+            { id: 'inter', label: 'Inter (Normal)', desc: 'Sans-serif, clean & modern' },
+            { id: 'source-code-pro', label: 'Source Code Pro', desc: 'Monospace, code-like style' },
+          ].map((f) => (
+            <button
+              key={f.id}
+              onClick={() => updateFont(f.id)}
+              className={`relative flex items-center gap-3 px-5 py-3 rounded-2xl border-2 transition-all ${
+                activeFont === f.id
+                  ? 'border-primary bg-primary/10'
+                  : 'border-glass/10 hover:border-glass/20 bg-glass/5'
+              }`}
+            >
+              <span className="text-sm font-medium whitespace-nowrap">{f.label}</span>
+              <span className="text-xs text-muted whitespace-nowrap">{f.desc}</span>
+              {activeFont === f.id && (
+                <div className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                  <Check size={12} className="text-white" />
+                </div>
+              )}
+            </button>
+          ))}
         </div>
       </div>
     </div>

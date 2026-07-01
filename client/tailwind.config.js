@@ -11,7 +11,8 @@ export default {
         glass: 'rgb(var(--color-glass-rgb) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        source: ['"Source Code Pro"', 'monospace'],
       },
     },
   },
