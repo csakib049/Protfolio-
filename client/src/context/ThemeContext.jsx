@@ -13,11 +13,16 @@ function applyTheme(theme) {
 }
 
 function applyFont(font) {
+  // Remove all font-specific classes
+  document.documentElement.classList.remove('font-source', 'font-space-mono');
+
   if (font === 'source-code-pro') {
     document.documentElement.classList.add('font-source');
-  } else {
-    document.documentElement.classList.remove('font-source');
+  } else if (font === 'space-mono') {
+    document.documentElement.classList.add('font-space-mono');
   }
+  // For 'inter' (default) we do nothing (remove the classes and leave the root variable)
+
   localStorage.setItem('portfolio-font', font);
 }
 

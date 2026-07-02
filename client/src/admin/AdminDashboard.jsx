@@ -142,6 +142,7 @@ export default function AdminDashboard() {
           {[
             { id: 'inter', label: 'Inter (Normal)', desc: 'Sans-serif, clean & modern' },
             { id: 'source-code-pro', label: 'Source Code Pro', desc: 'Monospace, code-like style' },
+            { id: 'space-mono', label: 'Space Mono', desc: 'Monospace, typewriter style' },
           ].map((f) => (
             <button
               key={f.id}
