@@ -28,7 +28,7 @@ function applyFont(font) {
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('portfolio-theme') || 'green';
+    const saved = localStorage.getItem('portfolio-theme') || 'orange';
     applyTheme(saved);
     return saved;
   });

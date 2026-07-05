@@ -38,10 +38,10 @@
 }
 
 .theme-orange {
-  --color-bg-rgb: 3 3 3;
+  --color-bg-rgb: 5 5 5;
   --color-surface-rgb: 255 255 255;
-  --color-primary-rgb: 249 115 22;
-  --color-primary-hex: #f97316;
+  --color-primary-rgb: 255 122 0;
+  --color-primary-hex: #ff7a00;
   --color-glass-rgb: 255 255 255;
   --color-text-rgb: 255 255 255;
   --color-text-muted-rgb: 156 163 175;
