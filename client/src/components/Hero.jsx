@@ -55,27 +55,25 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
+      className="relative min-h-screen flex items-center overflow-hidden pt-16"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-dark" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 w-full">
-        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-          <div className="fade-in fade-in-delay-1 shrink-0">
-            <div className="relative">
-              <div className="w-52 h-52 md:w-64 md:h-64 rounded-full glass-strong overflow-hidden">
-                <img src="/sakib.jpg" alt="Sakib" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute -inset-2 rounded-full border border-primary/30 pulse-ring" />
-              <div className="absolute -bottom-1 -right-1 md:-bottom-2 md:-right-2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500 border-4 border-dark flex items-center justify-center shadow-lg">
-                <svg viewBox="0 0 24 24" fill="white" className="w-4 h-4 md:w-5 md:h-5">
-                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                </svg>
-              </div>
-            </div>
-          </div>
+      <div className="absolute inset-0 flex">
+        <div className="hidden md:block w-1/2 lg:w-[55%]" />
+        <div className="relative w-full md:w-1/2 lg:w-[45%]">
+          <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/70 to-transparent z-10" />
+          <img
+            src="/profile.png"
+            alt="Sakib"
+            className="w-full h-full object-cover object-[55%_center]"
+          />
+        </div>
+      </div>
 
-          <div className="text-center md:text-left">
+      <div className="relative z-20 max-w-5xl mx-auto px-6 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          <div className="text-center md:text-left md:w-1/2 lg:w-[55%]">
             <div className="flex items-center gap-3 justify-center md:justify-start mb-2 fade-in fade-in-delay-1">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 {displayed}
@@ -117,10 +115,20 @@ export default function Hero() {
               </a>
             </div>
           </div>
+
+          <div className="md:hidden relative w-64 h-64 rounded-full glass-strong overflow-hidden shrink-0 fade-in fade-in-delay-1">
+            <div className="absolute -inset-2 rounded-full border border-primary/30 pulse-ring" />
+            <img src="/profile.png" alt="Sakib" className="w-full h-full object-cover object-[55%_center]" />
+            <div className="absolute -bottom-1 -right-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-500 border-4 border-dark flex items-center justify-center shadow-lg">
+              <svg viewBox="0 0 24 24" fill="white" className="w-4 h-4 md:w-5 md:h-5">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="hidden md:flex absolute right-20 top-1/2 -translate-y-1/2 flex-col items-center gap-4 fade-in fade-in-delay-5">
+      <div className="hidden md:flex absolute right-20 top-1/2 -translate-y-1/2 flex-col items-center gap-4 fade-in fade-in-delay-5 z-20">
         <div className="flex flex-col items-center">
           {Array.from('eM').map((ch, i) => (
             <span key={i} className="text-[10px] text-muted uppercase leading-none" style={{ transform: 'rotate(-90deg)' }}>{ch}</span>
@@ -154,7 +162,7 @@ export default function Hero() {
         </a>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20">
         <ArrowDown size={20} className="text-primary/60" />
       </div>
     </section>
