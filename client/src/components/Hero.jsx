@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Mail, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
+import { TypeAnimation } from 'react-type-animation';
 
 const terminalLines = [
   { command: 'whoami', output: 'Md. Sakib Chowdhury' },
@@ -36,10 +37,6 @@ export default function Hero() {
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="hidden lg:flex flex-col items-center gap-4 absolute left-8 bottom-12 z-10">
-        <span className="text-[10px] text-gray-600 tracking-[0.25em] font-medium [writing-mode:vertical-lr]">
-          FOLLOW ME
-        </span>
-        <div className="h-10 w-px bg-gray-800" />
         {socialLinks.map(({ icon: Icon, href }, i) => (
           <motion.a
             key={i}
@@ -57,7 +54,11 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="lg:w-[340px] shrink-0 flex flex-col items-center justify-center pt-0 md:pt-24 lg:pt-0 px-6 lg:px-0 lg:pl-16 order-2 md:order-1 lg:order-1">
+      <div
+        className="flex flex-col lg:flex-row flex-1 order-1"
+        style={{ transform: 'translateX(70px)' }}
+      >
+        <div className="lg:w-[340px] shrink-0 flex flex-col items-center justify-center pt-0 md:pt-24 lg:pt-0 px-6 lg:px-0 lg:pl-16 order-2 md:order-1 lg:order-1">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -110,25 +111,21 @@ export default function Hero() {
         </motion.div>
 
         <div className="flex lg:hidden items-center gap-4 mt-8 lg:mt-10">
-          <span className="text-[10px] text-gray-600 tracking-[0.25em] font-medium">FOLLOW ME</span>
-          <div className="h-px w-8 bg-gray-800" />
-          <div className="flex items-center gap-4">
-            {socialLinks.map(({ icon: Icon, href }, i) => (
-              <motion.a
-                key={i}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
-                whileHover={{ scale: 1.25, color: '#ff7a00' }}
-                className="text-gray-500 hover:text-primary transition-colors"
-              >
-                <Icon size={18} />
-              </motion.a>
-            ))}
-          </div>
+          {socialLinks.map(({ icon: Icon, href }, i) => (
+            <motion.a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
+              whileHover={{ scale: 1.25, color: '#ff7a00' }}
+              className="text-gray-500 hover:text-primary transition-colors"
+            >
+              <Icon size={18} />
+            </motion.a>
+          ))}
         </div>
       </div>
 
@@ -160,13 +157,22 @@ export default function Hero() {
           <span className="inline-block ml-2">👋</span>
         </motion.h1>
 
-        <motion.p
+        <motion.div
           variants={itemVariants}
-          className="text-lg sm:text-xl md:text-2xl text-primary font-semibold mb-4 max-w-2xl leading-snug"
+          className="mb-4 max-w-2xl"
         >
-          Full Stack Developer with a Passion<br className="hidden sm:block" />
-          for Backend Engineering
-        </motion.p>
+          <TypeAnimation
+            sequence={[
+              'Full Stack Developer with a\nPassion for Backend Engineering',
+              3000,
+            ]}
+            wrapper="div"
+            cursor={true}
+            repeat={Infinity}
+            className="text-lg sm:text-xl md:text-2xl text-primary font-semibold leading-snug"
+            style={{ whiteSpace: 'pre-line' }}
+          />
+        </motion.div>
 
         <motion.p
           variants={itemVariants}
@@ -219,6 +225,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
       </motion.div>
+      </div>
 
       <div className="hidden lg:block relative w-[40vw] shrink-0 overflow-hidden order-3">
         <motion.div
@@ -228,26 +235,26 @@ export default function Hero() {
           transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
         >
           <img
-            src="/hero-image.png"
+            src="/hero-image.jpg"
             alt=""
-            className="w-full h-full object-cover object-center"
-            style={{ filter: 'blur(3px)' }}
+            className="w-full h-full object-cover"
+            style={{ filter: 'blur(1px)', objectPosition: '50% center', transform: 'translateX(0px)' }}
           />
         </motion.div>
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.85) 25%, rgba(5,5,5,0.15) 60%, rgba(5,5,5,0) 100%)',
+            background: 'linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.95) 20%, rgba(5,5,5,0.75) 40%, rgba(5,5,5,0.35) 70%, rgba(5,5,5,0) 100%)',
           }}
         />
       </div>
 
       <div className="lg:hidden relative w-full h-[250px] md:h-[350px] overflow-hidden order-4 md:order-3 mt-8 md:mt-12">
         <img
-          src="/hero-image.png"
-          alt=""
-          className="w-full h-full object-cover object-center"
-          style={{ filter: 'blur(2px)' }}
+            src="/hero-image.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+            style={{ filter: 'blur(0.5px)' }}
         />
         <div
           className="absolute inset-0"
