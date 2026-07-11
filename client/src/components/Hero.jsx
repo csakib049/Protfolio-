@@ -228,19 +228,14 @@ export default function Hero() {
       </div>
 
       <div className="hidden lg:block relative w-[40vw] shrink-0 overflow-hidden order-3">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.08 }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-        >
+        <div className="absolute inset-0">
           <img
             src="/hero-image.jpg"
             alt=""
             className="w-full h-full object-cover"
-            style={{ filter: 'blur(1px)', objectPosition: '50% center', transform: 'translateX(0px)' }}
+            style={{ filter: 'blur(1px)', objectPosition: '56% center', transform: 'translateX(-58px)' }}
           />
-        </motion.div>
+        </div>
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -253,8 +248,8 @@ export default function Hero() {
         <img
             src="/hero-image.jpg"
             alt=""
-            className="w-full h-full object-cover object-center"
-            style={{ filter: 'blur(0.5px)' }}
+            className="w-full h-full object-cover"
+            style={{ filter: 'blur(0.5px)', objectPosition: '56% center', transform: 'translateX(-58px)' }}
         />
         <div
           className="absolute inset-0"
