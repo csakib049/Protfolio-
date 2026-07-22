@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Plus, Pencil, Trash2, X, Save, Loader2, Award } from 'lucide-react';
+import { Plus, Pencil, Trash2, X, Save, Loader2, Trophy, Star, BarChart3 } from 'lucide-react';
 import api from '@/api';
 
-const empty = { title: '', description: '', date: '' };
+const empty = { title: '', description: '', date: '', status: '', category: '', impactLevel: 0 };
 
 export default function AdminAchievements() {
   const [items, setItems] = useState([]);
@@ -40,6 +40,9 @@ export default function AdminAchievements() {
     fd.append('title', form.title);
     fd.append('date', form.date || '');
     fd.append('description', form.description || '');
+    fd.append('status', form.status || '');
+    fd.append('category', form.category || '');
+    fd.append('impactLevel', String(form.impactLevel || 0));
     if (file) fd.append('image', file);
     try {
       if (editing) {
@@ -79,7 +82,7 @@ export default function AdminAchievements() {
           className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
           onClick={() => setShowForm(false)}
         >
-          <div className="glass rounded-3xl p-8 w-full max-w-lg" onClick={(e) => e.stopPropagation()}>
+          <div className="glass rounded-3xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-semibold">{editing ? 'Edit Achievement' : 'New Achievement'}</h2>
               <button onClick={() => setShowForm(false)}><X size={20} /></button>
@@ -92,12 +95,46 @@ export default function AdminAchievements() {
                 required
                 className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
               />
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  value={form.status}
+                  onChange={(e) => setForm({ ...form, status: e.target.value })}
+                  placeholder="Status (e.g. Completed)"
+                  className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+                />
+                <input
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                  placeholder="Category (e.g. Hackathon)"
+                  className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+                />
+              </div>
               <input
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                placeholder="Date (e.g. 2024)"
+                placeholder="Date (e.g. May 2023)"
                 className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
               />
+              <div>
+                <label className="text-xs text-muted mb-1.5 block">Impact Level (1–5)</label>
+                <div className="flex gap-2">
+                  {[0, 1, 2, 3, 4, 5].map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setForm({ ...form, impactLevel: v })}
+                      className={`w-9 h-9 rounded-full text-xs font-medium transition-all ${
+                        form.impactLevel === v
+                          ? 'bg-primary text-white'
+                          : 'bg-glass/5 text-muted border border-glass/10 hover:border-primary/30'
+                      }`}
+                      style={form.impactLevel === v ? { boxShadow: '0 0 8px rgb(var(--color-primary-rgb) / 0.4)' } : undefined}
+                    >
+                      {v}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -134,7 +171,7 @@ export default function AdminAchievements() {
         {items.map((item) => (
           <div key={item._id} className="glass rounded-2xl p-6 group border border-glass/5">
             <div className="flex items-start justify-between gap-4">
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-4 flex-1 min-w-0">
                 {item.image ? (
                   <img
                     src={item.image}
@@ -142,14 +179,31 @@ export default function AdminAchievements() {
                     className="w-14 h-14 rounded-xl object-cover shrink-0"
                   />
                 ) : (
-                  <div className="w-14 h-14 rounded-xl bg-yellow-500/20 flex items-center justify-center shrink-0">
-                    <Award size={22} className="text-yellow-400" />
+                  <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
+                    <Trophy size={22} className="text-primary" />
                   </div>
                 )}
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  {item.date && <p className="text-xs text-muted mt-0.5">{item.date}</p>}
-                  {item.description && <p className="text-sm text-muted mt-2">{item.description}</p>}
+                <div className="min-w-0">
+                  <h3 className="font-semibold truncate">{item.title}</h3>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-xs text-muted">
+                    {item.date && <span>📅 {item.date}</span>}
+                    {item.status && (
+                      <span className="flex items-center gap-1">
+                        <Star size={10} /> {item.status}
+                      </span>
+                    )}
+                    {item.category && (
+                      <span className="flex items-center gap-1">
+                        <BarChart3 size={10} /> {item.category}
+                      </span>
+                    )}
+                    {item.impactLevel > 0 && (
+                      <span>Impact: {item.impactLevel}/5</span>
+                    )}
+                  </div>
+                  {item.description && (
+                    <p className="text-sm text-muted mt-2 line-clamp-2">{item.description}</p>
+                  )}
                 </div>
               </div>
               <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
@@ -171,7 +225,7 @@ export default function AdminAchievements() {
         ))}
         {!items.length && (
           <div className="text-center py-16 text-muted">
-            <Award size={40} className="mx-auto mb-4 opacity-30" />
+            <Trophy size={40} className="mx-auto mb-4 opacity-30" />
             <p>No achievements yet</p>
           </div>
         )}
