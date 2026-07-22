@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import DecryptedText from './DecryptedText';
 import api from '@/api';
 import * as Icons from 'lucide-react';
 
@@ -7,7 +8,13 @@ export default function About() {
   const [items, setItems] = useState([]);
   const [profile, setProfile] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
   const ref = useRef(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     api.get('/about').then(({ data }) => setItems(data)).catch(() => {});
@@ -41,12 +48,12 @@ export default function About() {
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 w-full">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.45fr] gap-10 lg:gap-24 items-start">
           {/* Left Column — bio + tabs */}
           <div className="space-y-8">
             <div className="reveal">
               <span className="text-primary text-sm font-medium uppercase tracking-widest">About Me</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-3">
+              <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mt-3 tracking-tight leading-none">
                 Passion for <span className="text-primary">Excellence</span>
               </h2>
               <p className="text-muted mt-4 leading-relaxed text-sm md:text-base">
@@ -94,8 +101,8 @@ export default function About() {
           </div>
 
           {/* Right Column — Profile Photo */}
-          <div className="reveal">
-            <div className="relative lg:sticky lg:top-24">
+          <div className="reveal flex justify-center lg:justify-end">
+            <div className="relative w-[92%] lg:w-full max-w-md lg:max-w-none lg:sticky lg:top-24">
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-[60px] opacity-60 pointer-events-none" />
               {profile?.photo ? (
                 <img

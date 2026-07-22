@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, BarChart3, Trophy } from 'lucide-react';
+import DecryptedText from './DecryptedText';
 import api from '@/api';
 
 function ImpactDots({ level }) {
@@ -21,7 +22,13 @@ function ImpactDots({ level }) {
 
 export default function Achievements() {
   const [items, setItems] = useState([]);
+  const [animKey, setAnimKey] = useState(0);
   const ref = useRef(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     api.get('/achievements').then(({ data }) => setItems(data)).catch(() => {});
@@ -53,11 +60,16 @@ export default function Achievements() {
 
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 reveal">
-          <h2
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary tracking-tight leading-none"
-            style={{ textShadow: '0 0 40px rgb(var(--color-primary-rgb) / 0.25), 0 0 80px rgb(var(--color-primary-rgb) / 0.1)' }}
-          >
-            ACHIEVEMENTS
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+            <DecryptedText
+              key={animKey}
+              text="ACHIEVEMENTS"
+              animateOn="view"
+              sequential
+              revealDirection="start"
+              className="text-primary glow-text"
+              encryptedClassName="text-primary/40"
+            />
           </h2>
           <p className="text-muted mt-4 text-sm tracking-wider uppercase">Recognitions &amp; Milestones</p>
         </div>
