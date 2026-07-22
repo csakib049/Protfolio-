@@ -13,6 +13,7 @@ import messageRoutes from './routes/messages.js';
 import achievementRoutes from './routes/achievements.js';
 import settingsRoutes from './routes/settings.js';
 import aboutRoutes from './routes/about.js';
+import profileRoutes from './routes/profile.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -31,6 +32,7 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/achievements', achievementRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/about', aboutRoutes);
+app.use('/api/profile', profileRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

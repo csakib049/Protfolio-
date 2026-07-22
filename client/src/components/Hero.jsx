@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
+import DecryptedText from './DecryptedText';
 
 const terminalLines = [
   { command: 'whoami', output: 'Md. Sakib Chowdhury' },
@@ -31,8 +33,22 @@ const itemVariants = {
 };
 
 export default function Hero() {
+  const [animKey, setAnimKey] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => setAnimKey(k => k + 1), 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex flex-col lg:flex-row bg-dark">
+    <section className="relative min-h-screen flex flex-col lg:flex-row">
+      <img
+        src="/sakib_perfect.jpeg"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: 'center top' }}
+      />
+      <div className="absolute inset-0 bg-dark/80" />
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -55,7 +71,7 @@ export default function Hero() {
       </div>
 
       <div
-        className="flex flex-col lg:flex-row flex-1 order-1"
+        className="flex flex-col lg:flex-row flex-1 order-1 relative z-10"
         style={{ transform: 'translateX(70px)' }}
       >
         <div className="lg:w-[340px] shrink-0 flex flex-col items-center justify-center pt-0 md:pt-24 lg:pt-0 px-6 lg:px-0 lg:pl-16 order-2 md:order-1 lg:order-1">
@@ -153,7 +169,7 @@ export default function Hero() {
           variants={itemVariants}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4 text-main"
         >
-          Hi, I'm <span className="text-primary glow-text">Sakib</span>
+          <DecryptedText key={animKey} text="Hi, I'm Sakib" animateOn="view" sequential revealDirection="start" className="text-primary glow-text" encryptedClassName="text-primary/40" />
           <span className="inline-block ml-2">👋</span>
         </motion.h1>
 
@@ -196,7 +212,7 @@ export default function Hero() {
             onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 0 0 rgba(255,122,0,0)' }}
           >
             <Mail size={16} />
-            Get in Touch
+            <DecryptedText text="Get in Touch" animateOn="hover" sequential revealDirection="start" className="text-white" encryptedClassName="text-white/40" />
           </motion.button>
 
           <motion.a
@@ -227,37 +243,6 @@ export default function Hero() {
       </motion.div>
       </div>
 
-      <div className="hidden lg:block relative w-[40vw] shrink-0 overflow-hidden order-3">
-        <div className="absolute inset-0">
-          <img
-            src="/hero-image.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-            style={{ filter: 'blur(1px)', objectPosition: '56% center', transform: 'translateX(-58px)' }}
-          />
-        </div>
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.95) 20%, rgba(5,5,5,0.75) 40%, rgba(5,5,5,0.35) 70%, rgba(5,5,5,0) 100%)',
-          }}
-        />
-      </div>
-
-      <div className="lg:hidden relative w-full h-[250px] md:h-[350px] overflow-hidden order-4 md:order-3 mt-8 md:mt-12">
-        <img
-            src="/hero-image.jpg"
-            alt=""
-            className="w-full h-full object-cover"
-            style={{ filter: 'blur(0.5px)', objectPosition: '56% center', transform: 'translateX(-58px)' }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(180deg, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.1) 40%, rgba(5,5,5,1) 100%)',
-          }}
-        />
-      </div>
     </section>
   );
 }
