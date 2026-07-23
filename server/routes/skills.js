@@ -9,6 +9,6 @@ router.get('/', ctrl.getAll);
 router.post('/', auth, upload.single('logo'), ctrl.create);
 router.put('/:id', auth, upload.single('logo'), ctrl.update);
 router.delete('/:id', auth, ctrl.remove);
-router.post('/sync-logos', auth, ctrl.syncLogos);
+router.get('/sync-logos', ctrl.syncLogos);
 
 export default router;
