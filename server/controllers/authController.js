@@ -31,6 +31,9 @@ export const signup = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required' });
     }
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ message: 'JWT_SECRET not configured on server' });
+    }
     const existing = await Admin.findOne({ email: email.toLowerCase() });
     if (existing) {
       return res.status(400).json({ message: 'Admin already exists' });
@@ -39,6 +42,7 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.status(201).json({ token, admin: { name: admin.name, email: admin.email } });
   } catch (err) {
+    console.error('Signup error:', err);
     res.status(500).json({ message: err.message });
   }
 };

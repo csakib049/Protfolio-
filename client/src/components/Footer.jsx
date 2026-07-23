@@ -52,7 +52,7 @@ export default function Footer() {
       setMessage('Account created! You can now go to /admin');
       setForm({ name: '', email: '', password: '' });
     } catch (err) {
-      setMessage(err.response?.data?.message || 'Error creating account');
+      setMessage(err.response?.data?.message || err.message || 'Error creating account');
     } finally {
       setLoading(false);
     }
