@@ -10,6 +10,7 @@ import AdminTestimonials from './admin/AdminTestimonials';
 import AdminMessages from './admin/AdminMessages';
 import AdminAchievements from './admin/AdminAchievements';
 import AdminAbout from './admin/AdminAbout';
+import AdminMediaCoverage from './admin/AdminMediaCoverage';
 import ProtectedRoute from './admin/ProtectedRoute';
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="messages" element={<AdminMessages />} />
         <Route path="achievements" element={<AdminAchievements />} />
         <Route path="about" element={<AdminAbout />} />
+        <Route path="media-coverage" element={<AdminMediaCoverage />} />
       </Route>
     </Routes>
   );

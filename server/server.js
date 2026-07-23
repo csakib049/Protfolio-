@@ -14,6 +14,7 @@ import achievementRoutes from './routes/achievements.js';
 import settingsRoutes from './routes/settings.js';
 import aboutRoutes from './routes/about.js';
 import profileRoutes from './routes/profile.js';
+import mediaCoverageRoutes from './routes/mediaCoverage.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -33,6 +34,7 @@ app.use('/api/achievements', achievementRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/about', aboutRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/media-coverage', mediaCoverageRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

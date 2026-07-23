@@ -7,6 +7,7 @@ import Achievements from '@/components/Achievements';
 import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
 import Testimonials from '@/components/Testimonials';
+import MediaCoverage from '@/components/MediaCoverage';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
@@ -23,6 +24,7 @@ export default function Home() {
       <Experience />
       <Projects />
       <Testimonials />
+      <MediaCoverage />
       <Contact />
       <Footer />
       <BackToTop />
