@@ -38,6 +38,16 @@ app.use('/api/media-coverage', mediaCoverageRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
+// Root Health Check Endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'Backend service is up and running',
+    timestamp: new Date().toISOString(),
+    uptimeSeconds: Math.floor(process.uptime())
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {
