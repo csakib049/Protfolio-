@@ -25,6 +25,24 @@ export const login = async (req, res) => {
   }
 };
 
+export const signup = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+    const existing = await Admin.findOne({ email: email.toLowerCase() });
+    if (existing) {
+      return res.status(400).json({ message: 'Admin already exists' });
+    }
+    const admin = await Admin.create({ name, email, password });
+    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.status(201).json({ token, admin: { name: admin.name, email: admin.email } });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 export const seedAdmin = async (req, res) => {
   try {
     const existing = await Admin.findOne({ email: process.env.ADMIN_EMAIL });
