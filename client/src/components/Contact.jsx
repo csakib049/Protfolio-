@@ -48,11 +48,18 @@ export default function Contact() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
-    <section id="contact" className="py-24 relative" ref={ref}>
+    <section id="contact" className="py-24 relative bg-dark" ref={ref}>
+      <img
+        src="/bottom_background.png"
+        alt=""
+        className="absolute bottom-0 left-0 w-full h-full object-cover pointer-events-none"
+        style={{ objectPosition: '50% 25%' }}
+      />
+      <div className="absolute inset-0 bg-dark/80 pointer-events-none" />
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-[3fr_3fr_4fr] gap-8 items-start">
           {/* ===== Column 1 — Let's Work Together! ===== */}
           <div className="reveal space-y-6 order-1">
