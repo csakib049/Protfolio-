@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, X, Save, Loader2, Upload, User } from 'lucide-react';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 
 const iconOptions = [
   'Code2', 'Lightbulb', 'Rocket', 'Sparkles', 'Zap', 'Shield',
@@ -99,7 +99,7 @@ export default function AdminAbout() {
         <div className="flex flex-col sm:flex-row items-start gap-6">
           <div className="w-40 h-48 rounded-2xl overflow-hidden border border-glass/10 bg-glass/5 flex items-center justify-center shrink-0">
             {profile?.photo ? (
-              <img src={profile.photo} alt="Profile" className="w-full h-full object-cover" />
+              <img src={API_ORIGIN + profile.photo} alt="Profile" className="w-full h-full object-cover" />
             ) : (
               <User size={40} className="text-muted/40" />
             )}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState([]);
@@ -55,7 +55,7 @@ export default function Testimonials() {
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full glass-strong flex items-center justify-center text-xl flex-shrink-0">
               {t.avatar ? (
-                <img src={t.avatar} alt={t.name} className="w-full h-full rounded-full object-cover" />
+                <img src={API_ORIGIN + t.avatar} alt={t.name} className="w-full h-full rounded-full object-cover" />
               ) : (
                 <span>{t.name.charAt(0)}</span>
               )}

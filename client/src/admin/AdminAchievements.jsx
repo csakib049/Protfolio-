@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, X, Save, Loader2, Trophy, Star, BarChart3 } from 'lucide-react';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 
 const empty = { title: '', description: '', date: '', status: '', category: '', impactLevel: 0 };
 
@@ -150,7 +150,7 @@ export default function AdminAchievements() {
               />
               {editing && form.image && !file && (
                 <div className="flex items-center gap-3 text-sm text-muted">
-                  <img src={form.image} alt="Current" className="w-16 h-12 rounded-lg object-cover" />
+                  <img src={API_ORIGIN + form.image} alt="Current" className="w-16 h-12 rounded-lg object-cover" />
                   <span>Current image</span>
                 </div>
               )}
@@ -174,7 +174,7 @@ export default function AdminAchievements() {
               <div className="flex items-start gap-4 flex-1 min-w-0">
                 {item.image ? (
                   <img
-                    src={item.image}
+                    src={API_ORIGIN + item.image}
                     alt={item.title}
                     className="w-14 h-14 rounded-xl object-cover shrink-0"
                   />

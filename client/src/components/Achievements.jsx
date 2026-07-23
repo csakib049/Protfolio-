@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, BarChart3, Trophy } from 'lucide-react';
 import DecryptedText from './DecryptedText';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 
 function ImpactDots({ level }) {
   return (
@@ -90,7 +90,7 @@ export default function Achievements() {
                 <div className="relative rounded-xl overflow-hidden border border-glass/10 h-56 md:h-full bg-glass/5">
                   {item.image ? (
                     <img
-                      src={item.image}
+                      src={API_ORIGIN + item.image}
                       alt={item.title}
                       className="w-full h-full object-cover"
                     />

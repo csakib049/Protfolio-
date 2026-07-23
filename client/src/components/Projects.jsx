@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -50,7 +50,7 @@ export default function Projects() {
               <div className="relative h-48 overflow-hidden bg-glass/5">
                 {project.image ? (
                   <img
-                    src={project.image}
+                    src={API_ORIGIN + project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />

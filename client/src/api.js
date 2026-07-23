@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+export const API_ORIGIN = window.location.hostname === 'localhost' ? '' : 'https://protfolio-backend-tf9i.onrender.com';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_ORIGIN + '/api',
 });
 
 api.interceptors.request.use((config) => {

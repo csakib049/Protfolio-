@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import DecryptedText from './DecryptedText';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 import * as Icons from 'lucide-react';
 
 export default function About() {
@@ -106,7 +106,7 @@ export default function About() {
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-[60px] opacity-60 pointer-events-none" />
               {profile?.photo ? (
                 <img
-                  src={profile.photo}
+                  src={API_ORIGIN + profile.photo}
                   alt="Profile"
                   className="relative w-full h-72 sm:h-80 lg:h-[calc(100vh-12rem)] rounded-2xl shadow-lg border border-glass/10 object-cover"
                 />
