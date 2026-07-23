@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check, Type, FileText, Upload, Loader2, Trash2 } from 'lucide-react';
+import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check, Type, FileText, Link, Loader2, Trash2, ExternalLink } from 'lucide-react';
 import api from '@/api';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -40,8 +40,8 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState([]);
   const { theme: activeTheme, updateTheme, font: activeFont, updateFont } = useTheme();
   const [updating, setUpdating] = useState(null);
-  const [resumeFile, setResumeFile] = useState(null);
-  const [resumeUploading, setResumeUploading] = useState(false);
+  const [resumeLink, setResumeLink] = useState('');
+  const [resumeSaving, setResumeSaving] = useState(false);
   const [resumeUrl, setResumeUrl] = useState('');
 
   useEffect(() => {
@@ -70,30 +70,31 @@ export default function AdminDashboard() {
     }).catch(() => {});
   }, []);
 
-  const handleResumeUpload = async (e) => {
-    e.preventDefault();
-    if (!resumeFile) return;
-    setResumeUploading(true);
+  const handleResumeSave = async () => {
+    if (!resumeLink.trim()) return;
+    setResumeSaving(true);
     try {
-      const fd = new FormData();
-      fd.append('resume', resumeFile);
-      const { data } = await api.post('/settings/resume', fd);
+      const { data } = await api.put('/settings', { resume: resumeLink.trim() });
       setResumeUrl(data.resume);
-      setResumeFile(null);
+      setResumeLink('');
     } catch (err) {
-      alert(err.response?.data?.message || 'Upload failed');
+      alert(err.response?.data?.message || 'Failed to save link');
     } finally {
-      setResumeUploading(false);
+      setResumeSaving(false);
     }
   };
 
   const handleResumeDelete = async () => {
-    if (!confirm('Remove resume?')) return;
+    if (!confirm('Remove resume link?')) return;
     try {
       await api.put('/settings', { resume: '' });
       setResumeUrl('');
     } catch {}
   };
+
+  useEffect(() => {
+    if (resumeUrl) setResumeLink(resumeUrl);
+  }, [resumeUrl]);
 
   const handleThemeChange = async (id) => {
     setUpdating(id);
@@ -170,51 +171,49 @@ export default function AdminDashboard() {
           <h2 className="text-lg font-semibold">Resume / CV</h2>
         </div>
         <p className="text-sm text-muted mb-6">
-          Upload your resume PDF. Visitors can download it from the hero section.
+          Paste your resume link (Google Drive, Dropbox, etc.). Visitors will be redirected when they click "Download CV".
         </p>
         <div className="flex flex-col sm:flex-row items-start gap-6">
-          <div className="flex-1 w-full">
-            <form onSubmit={handleResumeUpload} className="flex flex-col sm:flex-row gap-3">
+          <div className="flex-1 w-full flex flex-col sm:flex-row gap-3">
+            <div className="flex-1 relative">
+              <Link size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
               <input
-                type="file"
-                onChange={(e) => setResumeFile(e.target.files[0])}
-                accept=".pdf"
-                className="flex-1 w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                value={resumeLink}
+                onChange={(e) => setResumeLink(e.target.value)}
+                placeholder="https://drive.google.com/..."
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
               />
+            </div>
+            <div className="flex gap-2">
               <button
-                type="submit"
-                disabled={!resumeFile || resumeUploading}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all disabled:opacity-50"
+                onClick={handleResumeSave}
+                disabled={!resumeLink.trim() || resumeSaving}
+                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all disabled:opacity-50"
               >
-                {resumeUploading ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
-                Upload
+                {resumeSaving ? <Loader2 size={16} className="animate-spin" /> : <Link size={16} />}
+                Save
               </button>
-            </form>
-            <p className="text-xs text-muted mt-2">Accepted: .pdf &bull; Max 10MB</p>
-          </div>
-          <div className="flex items-center gap-3 shrink-0">
-            {resumeUrl ? (
-              <>
-                <a
-                  href={resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all"
-                >
-                  <FileText size={16} />
-                  View Resume
-                </a>
+              {resumeUrl && (
                 <button
                   onClick={handleResumeDelete}
-                  className="p-2 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all"
+                  className="p-3 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all"
                 >
                   <Trash2 size={16} />
                 </button>
-              </>
-            ) : (
-              <p className="text-sm text-muted">No resume uploaded</p>
-            )}
+              )}
+            </div>
           </div>
+          {resumeUrl && (
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all shrink-0"
+            >
+              <ExternalLink size={16} />
+              Test Link
+            </a>
+          )}
         </div>
       </div>
 

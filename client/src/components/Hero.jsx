@@ -247,7 +247,8 @@ export default function Hero() {
 
           <motion.a
             href={resumeUrl}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-6 py-3 rounded-full font-medium text-sm flex items-center gap-2 text-gray-300 cursor-pointer transition-all duration-300"
