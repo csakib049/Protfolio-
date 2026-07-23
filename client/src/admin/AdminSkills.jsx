@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Plus, Pencil, Trash2, X, Save, Loader2 } from 'lucide-react';
-import api from '@/api';
+import api, { API_ORIGIN } from '@/api';
 
 const empty = { name: '', category: 'Frontend', logo: '' };
 
@@ -98,7 +98,7 @@ export default function AdminSkills() {
         {items.map((item) => (
           <div key={item._id} className="glass rounded-xl px-5 py-3 flex items-center gap-3 group">
             {item.logo ? (
-              <img src={item.logo} alt={item.name} className="w-8 h-8 object-contain rounded" />
+              <img src={API_ORIGIN + item.logo} alt={item.name} className="w-8 h-8 object-contain rounded" />
             ) : (
               <div className="w-8 h-8 rounded bg-glass/5 flex items-center justify-center text-xs text-muted">
                 {item.name.charAt(0).toUpperCase()}

@@ -25,3 +25,43 @@ export const remove = async (req, res) => {
   if (!item) return res.status(404).json({ message: 'Not found' });
   res.json({ message: 'Deleted' });
 };
+
+export const syncLogos = async (req, res) => {
+  const nameToFile = {
+    'HTML': 'html.png',
+    'CSS': 'CSS.png',
+    'JavaScript': 'JS.png',
+    'JS': 'JS.png',
+    'TypeScript': 'TS.png',
+    'TS': 'TS.png',
+    'React': 'React.png',
+    'Tailwind CSS': 'Tailwind.png',
+    'Tailwind': 'Tailwind.png',
+    'Node.js': 'NodeJS.png',
+    'NodeJS': 'NodeJS.png',
+    'Express': 'express.png',
+    'Express.js': 'express.png',
+    'MongoDB': 'Mongo.png',
+    'Mongo': 'Mongo.png',
+    'SQL': 'SQL.png',
+    'Python': 'python.png',
+    'Java': 'java.png',
+    'C': 'c.png',
+    'C++': 'cpp.png',
+    'Cpp': 'cpp.png',
+    'Docker': 'docker.png',
+    'Git': 'git.png',
+    'GitHub': 'github.png',
+  };
+  const skills = await Skill.find();
+  let updated = 0;
+  for (const skill of skills) {
+    const file = nameToFile[skill.name];
+    if (file) {
+      skill.logo = `/uploads/${file}`;
+      await skill.save();
+      updated++;
+    }
+  }
+  res.json({ message: `Updated ${updated} of ${skills.length} skills` });
+};
