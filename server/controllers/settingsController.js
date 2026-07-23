@@ -18,3 +18,15 @@ export const update = async (req, res) => {
   }
   res.json(settings);
 };
+
+export const uploadResume = async (req, res) => {
+  if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+  let settings = await Settings.findOne();
+  if (!settings) {
+    settings = await Settings.create({ resume: `/uploads/${req.file.filename}` });
+  } else {
+    settings.resume = `/uploads/${req.file.filename}`;
+    await settings.save();
+  }
+  res.json(settings);
+};

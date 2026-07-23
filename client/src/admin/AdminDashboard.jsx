@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check, Type } from 'lucide-react';
+import { FolderGit2, Briefcase, Code2, Star, MessageSquare, Award, Palette, Check, Type, FileText, Upload, Loader2, Trash2 } from 'lucide-react';
 import api from '@/api';
 import { useTheme } from '@/context/ThemeContext';
 
@@ -40,6 +40,9 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState([]);
   const { theme: activeTheme, updateTheme, font: activeFont, updateFont } = useTheme();
   const [updating, setUpdating] = useState(null);
+  const [resumeFile, setResumeFile] = useState(null);
+  const [resumeUploading, setResumeUploading] = useState(false);
+  const [resumeUrl, setResumeUrl] = useState('');
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -60,6 +63,37 @@ export default function AdminDashboard() {
   }, []);
 
   const icons = [FolderGit2, Briefcase, Code2, Star, MessageSquare, Award];
+
+  useEffect(() => {
+    api.get('/settings').then(({ data }) => {
+      if (data?.resume) setResumeUrl(data.resume);
+    }).catch(() => {});
+  }, []);
+
+  const handleResumeUpload = async (e) => {
+    e.preventDefault();
+    if (!resumeFile) return;
+    setResumeUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('resume', resumeFile);
+      const { data } = await api.post('/settings/resume', fd);
+      setResumeUrl(data.resume);
+      setResumeFile(null);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Upload failed');
+    } finally {
+      setResumeUploading(false);
+    }
+  };
+
+  const handleResumeDelete = async () => {
+    if (!confirm('Remove resume?')) return;
+    try {
+      await api.put('/settings', { resume: '' });
+      setResumeUrl('');
+    } catch {}
+  };
 
   const handleThemeChange = async (id) => {
     setUpdating(id);
@@ -127,6 +161,60 @@ export default function AdminDashboard() {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      <div className="glass rounded-2xl p-8 mt-8">
+        <div className="flex items-center gap-3 mb-6">
+          <FileText size={24} className="text-primary" />
+          <h2 className="text-lg font-semibold">Resume / CV</h2>
+        </div>
+        <p className="text-sm text-muted mb-6">
+          Upload your resume PDF. Visitors can download it from the hero section.
+        </p>
+        <div className="flex flex-col sm:flex-row items-start gap-6">
+          <div className="flex-1 w-full">
+            <form onSubmit={handleResumeUpload} className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="file"
+                onChange={(e) => setResumeFile(e.target.files[0])}
+                accept=".pdf"
+                className="flex-1 w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+              />
+              <button
+                type="submit"
+                disabled={!resumeFile || resumeUploading}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all disabled:opacity-50"
+              >
+                {resumeUploading ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
+                Upload
+              </button>
+            </form>
+            <p className="text-xs text-muted mt-2">Accepted: .pdf &bull; Max 10MB</p>
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
+            {resumeUrl ? (
+              <>
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all"
+                >
+                  <FileText size={16} />
+                  View Resume
+                </a>
+                <button
+                  onClick={handleResumeDelete}
+                  className="p-2 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </>
+            ) : (
+              <p className="text-sm text-muted">No resume uploaded</p>
+            )}
+          </div>
         </div>
       </div>
 

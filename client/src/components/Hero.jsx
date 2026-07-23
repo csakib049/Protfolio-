@@ -4,6 +4,7 @@ import { Mail, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
 import DecryptedText from './DecryptedText';
+import api from '@/api';
 
 const terminalLines = [
   { command: 'whoami', output: 'Md. Sakib Chowdhury' },
@@ -34,10 +35,17 @@ const itemVariants = {
 
 export default function Hero() {
   const [animKey, setAnimKey] = useState(0);
+  const [resumeUrl, setResumeUrl] = useState('/cv.pdf');
 
   useEffect(() => {
     const timer = setInterval(() => setAnimKey(k => k + 1), 5000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    api.get('/settings').then(({ data }) => {
+      if (data?.resume) setResumeUrl(data.resume);
+    }).catch(() => {});
   }, []);
 
   return (
@@ -216,7 +224,7 @@ export default function Hero() {
           </motion.button>
 
           <motion.a
-            href="/cv.pdf"
+            href={resumeUrl}
             download
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
