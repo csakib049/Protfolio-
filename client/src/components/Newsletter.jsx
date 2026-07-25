@@ -1,0 +1,145 @@
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
+import DecryptedText from './DecryptedText';
+import Lightbox from './Lightbox';
+import api, { API_ORIGIN } from '@/api';
+
+export default function Newsletter() {
+  const [items, setItems] = useState([]);
+  const [animKey, setAnimKey] = useState(0);
+  const [lightbox, setLightbox] = useState(null);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    api.get('/newsletter').then(({ data }) => setItems(data)).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.reveal').forEach((r, i) => {
+              setTimeout(() => r.classList.add('visible'), i * 100);
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [items]);
+
+  if (!items.length) return null;
+
+  return (
+    <>
+    <section id="newsletter" className="py-24 relative" ref={ref}>
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16 reveal">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+            <DecryptedText
+              key={animKey}
+              text="NEWSLETTER"
+              animateOn="view"
+              sequential
+              revealDirection="start"
+              className="text-primary glow-text"
+              encryptedClassName="text-primary/40"
+            />
+          </h2>
+          <p className="text-muted mt-4 text-sm tracking-wider uppercase">Updates &amp; Insights</p>
+        </div>
+
+        <div className="space-y-8">
+          {items.map((item, i) => (
+            <motion.div
+              key={item._id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="reveal flex flex-col md:flex-row gap-6 glass rounded-2xl p-4 md:p-6 border border-glass/5"
+            >
+              <div className="flex-1 space-y-4">
+                <h3 className="text-xl md:text-2xl font-bold text-white leading-tight line-clamp-2">
+                  {item.title}
+                </h3>
+
+                {item.description && (
+                  <div className="bg-glass/5 border border-glass/10 rounded-xl p-4">
+                    <p className="text-sm text-muted leading-relaxed">{item.description}</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="relative w-full md:w-80 lg:w-96 shrink-0">
+                <div className="absolute -inset-2 bg-primary/10 rounded-2xl blur-[40px] opacity-50 pointer-events-none" />
+                {(() => {
+                  const imgs = item.images || (item.image ? [item.image] : []);
+                  const fullUrls = imgs.map(u => API_ORIGIN + u);
+                  return imgs.length === 1 ? (
+                    <div className="relative rounded-xl overflow-hidden border border-glass/10 h-64 md:h-full bg-glass/5 cursor-pointer group"
+                      onClick={() => setLightbox({ images: fullUrls, initialIndex: 0 })}
+                    >
+                      <img
+                        src={API_ORIGIN + imgs[0]}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 left-3 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-lg">
+                        #{String(i + 1).padStart(2, '0')}
+                      </div>
+                    </div>
+                  ) : imgs.length > 0 ? (
+                    <div className="grid grid-cols-2 gap-2">
+                      {imgs.slice(0, 4).map((url, idx) => (
+                        <div key={idx} className="relative rounded-xl overflow-hidden border border-glass/10 h-56 bg-glass/5 cursor-pointer group"
+                          onClick={() => setLightbox({ images: fullUrls, initialIndex: idx })}
+                        >
+                          <img
+                            src={API_ORIGIN + url}
+                            alt={`${item.title} ${idx + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          {idx === 0 && (
+                            <div className="absolute top-2 left-2 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+                              #{String(i + 1).padStart(2, '0')}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="relative rounded-xl overflow-hidden border border-glass/10 h-64 md:h-full bg-glass/5">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Mail size={40} className="text-primary/40" />
+                      </div>
+                      <div className="absolute top-3 left-3 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-lg">
+                        #{String(i + 1).padStart(2, '0')}
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+      {lightbox && <Lightbox {...lightbox} onClose={() => setLightbox(null)} />}
+    </>
+  );
+}

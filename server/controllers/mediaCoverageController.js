@@ -2,19 +2,36 @@ import MediaCoverage from '../models/MediaCoverage.js';
 
 export const getAll = async (req, res) => {
   const items = await MediaCoverage.find().sort({ createdAt: -1 });
-  res.json(items);
+  for (const item of items) {
+    if ((!item.images || item.images.length === 0) && item.image) {
+      await MediaCoverage.findByIdAndUpdate(item._id, { images: [item.image] });
+    }
+  }
+  const result = await MediaCoverage.find().sort({ createdAt: -1 });
+  res.json(result);
 };
 
 export const create = async (req, res) => {
   const data = { ...req.body };
-  if (req.file) data.image = `/uploads/${req.file.filename}`;
+  const uploaded = (req.files || []).map(f => `/uploads/${f.filename}`);
+  if (uploaded.length) data.images = uploaded;
   const item = await MediaCoverage.create(data);
   res.status(201).json(item);
 };
 
 export const update = async (req, res) => {
   const data = { ...req.body };
-  if (req.file) data.image = `/uploads/${req.file.filename}`;
+  const uploaded = (req.files || []).map(f => `/uploads/${f.filename}`);
+  let existingImages = [];
+  if (req.body.existingImages) {
+    try {
+      existingImages = JSON.parse(req.body.existingImages);
+    } catch {
+      existingImages = req.body.existingImages.split(',').filter(Boolean);
+    }
+  }
+  data.images = [...existingImages, ...uploaded];
+  delete data.image;
   const item = await MediaCoverage.findByIdAndUpdate(req.params.id, data, { new: true });
   if (!item) return res.status(404).json({ message: 'Not found' });
   res.json(item);

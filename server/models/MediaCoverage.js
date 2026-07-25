@@ -4,6 +4,7 @@ const mediaCoverageSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   link: { type: String, required: true },
+  images: [{ type: String }],
   image: { type: String, default: '' },
   date: { type: String, default: '' },
 }, { timestamps: true });

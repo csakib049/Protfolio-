@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FolderGit2, Briefcase, Code2, MessageSquare, Star, Award, User, Newspaper, LogOut } from 'lucide-react';
+import { LayoutDashboard, FolderGit2, Briefcase, Code2, MessageSquare, Star, Award, User, Newspaper, Mail, LogOut } from 'lucide-react';
 
 const sidebarLinks = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -10,6 +10,7 @@ const sidebarLinks = [
   { to: '/admin/dashboard/messages', label: 'Messages', icon: MessageSquare },
   { to: '/admin/dashboard/achievements', label: 'Achievements', icon: Award },
   { to: '/admin/dashboard/media-coverage', label: 'Media Coverage', icon: Newspaper },
+  { to: '/admin/dashboard/newsletter', label: 'Newsletter', icon: Mail },
   { to: '/admin/dashboard/about', label: 'About Me', icon: User },
 ];
 

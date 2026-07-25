@@ -8,12 +8,21 @@ import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
 import Testimonials from '@/components/Testimonials';
 import MediaCoverage from '@/components/MediaCoverage';
+import Newsletter from '@/components/Newsletter';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
+import ClickSpark from '@/components/ClickSpark';
 
 export default function Home() {
   return (
+    <ClickSpark
+      sparkColor="#a855f7"
+      sparkSize={12}
+      sparkRadius={20}
+      sparkCount={10}
+      duration={500}
+    >
     <div className="relative min-h-screen bg-dark overflow-hidden">
       <FloatingDots />
       <Navbar />
@@ -25,9 +34,11 @@ export default function Home() {
       <Projects />
       <Testimonials />
       <MediaCoverage />
+      <Newsletter />
       <Contact />
       <Footer />
       <BackToTop />
     </div>
+    </ClickSpark>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, BarChart3, Trophy } from 'lucide-react';
 import DecryptedText from './DecryptedText';
+import Lightbox from './Lightbox';
 import api, { API_ORIGIN } from '@/api';
 
 function ImpactDots({ level }) {
@@ -23,6 +24,7 @@ function ImpactDots({ level }) {
 export default function Achievements() {
   const [items, setItems] = useState([]);
   const [animKey, setAnimKey] = useState(0);
+  const [lightbox, setLightbox] = useState(null);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function Achievements() {
   }, [items]);
 
   return (
+    <>
     <section id="achievements" className="py-24 relative" ref={ref}>
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
@@ -84,30 +87,72 @@ export default function Achievements() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="reveal flex flex-col md:flex-row gap-6 glass rounded-2xl p-4 md:p-6 border border-glass/5"
             >
-              {/* Left — Photo */}
-              <div className="relative w-full md:w-72 lg:w-80 shrink-0">
+              {/* Left — Photo(s) */}
+              <div className="relative w-full md:w-80 lg:w-96 shrink-0">
                 <div className="absolute -inset-2 bg-primary/10 rounded-2xl blur-[40px] opacity-50 pointer-events-none" />
-                <div className="relative rounded-xl overflow-hidden border border-glass/10 h-56 md:h-full bg-glass/5">
-                  {item.image ? (
-                    <img
-                      src={API_ORIGIN + item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
+                {(() => {
+                  const imgs = item.images || (item.image ? [item.image] : []);
+                  const fullUrls = imgs.map(u => API_ORIGIN + u);
+                  return imgs.length === 1 ? (
+                    <div className="relative rounded-xl overflow-hidden border border-glass/10 h-64 md:h-full bg-glass/5 cursor-pointer group"
+                      onClick={() => setLightbox({ images: fullUrls, initialIndex: 0 })}
+                    >
+                      <img
+                        src={API_ORIGIN + imgs[0]}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute top-3 left-3 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-lg">
+                        #{String(i + 1).padStart(2, '0')}
+                      </div>
+                      {item.date && (
+                        <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-lg">
+                          📅 {item.date}
+                        </div>
+                      )}
+                    </div>
+                  ) : imgs.length > 0 ? (
+                    <div className="grid grid-cols-2 gap-2">
+                      {imgs.slice(0, 4).map((url, idx) => (
+                        <div key={idx} className="relative rounded-xl overflow-hidden border border-glass/10 h-56 bg-glass/5 cursor-pointer group"
+                          onClick={() => setLightbox({ images: fullUrls, initialIndex: idx })}
+                        >
+                          <img
+                            src={API_ORIGIN + url}
+                            alt={`${item.title} ${idx + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                          {idx === 0 && (
+                            <div className="absolute top-2 left-2 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+                              #{String(i + 1).padStart(2, '0')}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                      {item.date && (
+                        <div className="col-span-2 text-center">
+                          <span className="inline-block bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-lg">
+                            📅 {item.date}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Trophy size={40} className="text-primary/40" />
+                    <div className="relative rounded-xl overflow-hidden border border-glass/10 h-64 md:h-full bg-glass/5">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Trophy size={40} className="text-primary/40" />
+                      </div>
+                      <div className="absolute top-3 left-3 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-lg">
+                        #{String(i + 1).padStart(2, '0')}
+                      </div>
+                      {item.date && (
+                        <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-lg">
+                          📅 {item.date}
+                        </div>
+                      )}
                     </div>
-                  )}
-                  <div className="absolute top-3 left-3 bg-primary/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-lg">
-                    #{String(i + 1).padStart(2, '0')}
-                  </div>
-                  {item.date && (
-                    <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-lg">
-                      📅 {item.date}
-                    </div>
-                  )}
-                </div>
+                  );
+                })()}
               </div>
 
               {/* Right — Content */}
@@ -153,5 +198,7 @@ export default function Achievements() {
         </div>
       </div>
     </section>
+      {lightbox && <Lightbox {...lightbox} onClose={() => setLightbox(null)} />}
+    </>
   );
 }
