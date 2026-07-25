@@ -16,6 +16,7 @@ import aboutRoutes from './routes/about.js';
 import profileRoutes from './routes/profile.js';
 import mediaCoverageRoutes from './routes/mediaCoverage.js';
 import newsletterRoutes from './routes/newsletter.js';
+import githubRoutes from './routes/github.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -37,6 +38,7 @@ app.use('/api/about', aboutRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/media-coverage', mediaCoverageRoutes);
 app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/github', githubRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

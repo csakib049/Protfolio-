@@ -6,6 +6,7 @@ import SkillsMarquee from '@/components/SkillsMarquee';
 import Achievements from '@/components/Achievements';
 import Experience from '@/components/Experience';
 import Projects from '@/components/Projects';
+import GitHubActivity from '@/components/GitHubActivity';
 import Testimonials from '@/components/Testimonials';
 import MediaCoverage from '@/components/MediaCoverage';
 import Newsletter from '@/components/Newsletter';
@@ -30,6 +31,7 @@ export default function Home() {
       <About />
       <SkillsMarquee />
       <Projects />
+      <GitHubActivity />
       <Achievements />
       <Experience />
       <Testimonials />
