@@ -1,8 +1,15 @@
 import { useEffect, useState } from 'react';
+import DecryptedText from './DecryptedText';
 import api, { API_ORIGIN } from '@/api';
 
 export default function SkillsMarquee() {
   const [skills, setSkills] = useState([]);
+  const [animKey, setAnimKey] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     api.get('/skills').then((res) => setSkills(res.data)).catch(() => {});
@@ -22,10 +29,18 @@ export default function SkillsMarquee() {
       <div className="absolute inset-0 bg-black/60" />
       <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
         <div className="text-center mb-10">
-          <span className="text-primary text-sm font-medium uppercase tracking-widest">Skills & Technologies</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 text-white">
-            My <span className="text-primary">Skills</span>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+            <DecryptedText
+              key={animKey}
+              text="MY SKILLS"
+              animateOn="view"
+              sequential
+              revealDirection="start"
+              className="text-primary glow-text"
+              encryptedClassName="text-primary/40"
+            />
           </h2>
+          <p className="text-muted mt-4 text-sm tracking-wider uppercase">Technologies &amp; Tools</p>
         </div>
         <div className="flex flex-wrap justify-center gap-4">
           {skills.map((skill) => (

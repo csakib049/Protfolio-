@@ -8,14 +8,23 @@ export const getProfile = async (req, res) => {
   res.json(profile);
 };
 
-export const updateBio = async (req, res) => {
+export const updateProfile = async (req, res) => {
   let profile = await Profile.findOne();
+  const allowed = [
+    'bio', 'smallLabel', 'heading',
+    'education',
+    'experienceRole', 'experienceCompany',
+    'interests', 'techStack', 'highlights',
+  ];
   if (!profile) {
-    profile = await Profile.create({ bio: req.body.bio || '', photo: '' });
-  } else {
-    profile.bio = req.body.bio || profile.bio;
-    await profile.save();
+    profile = new Profile();
   }
+  for (const field of allowed) {
+    if (req.body[field] !== undefined) {
+      profile[field] = req.body[field];
+    }
+  }
+  await profile.save();
   res.json(profile);
 };
 

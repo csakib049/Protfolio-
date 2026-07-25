@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, Code, Server, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { FaLinkedin, FaGithub, FaInstagram, FaFacebook, FaDiscord } from 'react-icons/fa';
 import api from '@/api';
 
 const helpItems = [
@@ -120,6 +121,33 @@ export default function Contact() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Social Links */}
+            <div className="glass rounded-2xl p-5">
+              <h3 className="text-sm font-semibold mb-4">Follow Me</h3>
+              <div className="flex flex-wrap gap-3">
+                <a href="https://www.linkedin.com/in/md-sakib-chowdhury-3990791a8/" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaLinkedin size={20} />
+                </a>
+                <a href="https://github.com/csakib049" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaGithub size={20} />
+                </a>
+                <a href="https://www.instagram.com/s_a_a_k_i_b/" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaInstagram size={20} />
+                </a>
+                <a href="https://www.facebook.com/muntasir.sakib.376/" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaFacebook size={20} />
+                </a>
+                <a href="https://discordapp.com/users/1081408248197939363" target="_blank" rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaDiscord size={20} />
+                </a>
+              </div>
             </div>
           </div>
 

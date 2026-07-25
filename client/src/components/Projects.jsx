@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
+import DecryptedText from './DecryptedText';
 import api, { API_ORIGIN } from '@/api';
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
+  const [animKey, setAnimKey] = useState(0);
   const ref = useRef(null);
+
+  useEffect(() => {
+    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     api.get('/projects').then((res) => setProjects(res.data)).catch(() => {});
@@ -35,10 +42,18 @@ export default function Projects() {
     <section id="projects" className="py-24 relative" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 reveal">
-          <span className="text-primary text-sm font-medium uppercase tracking-widest">Projects</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3">
-            Featured <span className="text-primary">Work</span>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+            <DecryptedText
+              key={animKey}
+              text="PROJECTS"
+              animateOn="view"
+              sequential
+              revealDirection="start"
+              className="text-primary glow-text"
+              encryptedClassName="text-primary/40"
+            />
           </h2>
+          <p className="text-muted mt-4 text-sm tracking-wider uppercase">Featured Work</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,211 +1,285 @@
 import { useEffect, useState } from 'react';
-import { Plus, Pencil, Trash2, X, Save, Loader2, Upload, User } from 'lucide-react';
-import api, { API_ORIGIN } from '@/api';
-
-const iconOptions = [
-  'Code2', 'Lightbulb', 'Rocket', 'Sparkles', 'Zap', 'Shield',
-  'Star', 'Heart', 'Globe', 'Award', 'Cpu', 'Brain',
-];
-
-const empty = { title: '', description: '', icon: 'Sparkles' };
+import { Save, Loader2, Plus, X } from 'lucide-react';
+import api from '@/api';
 
 export default function AdminAbout() {
-  const [items, setItems] = useState([]);
   const [profile, setProfile] = useState(null);
-  const [showForm, setShowForm] = useState(false);
-  const [editing, setEditing] = useState(null);
-  const [form, setForm] = useState(empty);
+  const [form, setForm] = useState({
+    smallLabel: '',
+    heading: '',
+    bio: '',
+    education: [],
+    experienceRole: '',
+    experienceCompany: '',
+    interests: [],
+    techStack: [],
+    highlights: [],
+  });
   const [loading, setLoading] = useState(false);
-  const [photoFile, setPhotoFile] = useState(null);
-  const [bio, setBio] = useState('');
-  const [photoUploading, setPhotoUploading] = useState(false);
-  const [bioSaving, setBioSaving] = useState(false);
+  const [newInterest, setNewInterest] = useState('');
+  const [newTech, setNewTech] = useState('');
+  const [newHighlight, setNewHighlight] = useState('');
 
   const load = async () => {
-    const [{ data: aboutData }, { data: profileData }] = await Promise.all([
-      api.get('/about'),
-      api.get('/profile'),
-    ]);
-    setItems(aboutData);
-    setProfile(profileData);
-    setBio(profileData?.bio || '');
+    const { data } = await api.get('/profile');
+    setProfile(data);
+    setForm({
+      smallLabel: data.smallLabel || '',
+      heading: data.heading || '',
+      bio: data.bio || '',
+      education: data.education || [],
+      experienceRole: data.experienceRole || '',
+      experienceCompany: data.experienceCompany || '',
+      interests: data.interests || [],
+      techStack: data.techStack || [],
+      highlights: data.highlights || [],
+    });
   };
 
   useEffect(() => { load(); }, []);
 
-  const openCreate = () => { setForm(empty); setEditing(null); setShowForm(true); };
-  const openEdit = (item) => { setForm(item); setEditing(item._id); setShowForm(true); };
+  const updateField = (field, value) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+  };
+
+  const addListItem = (field) => {
+    const inputMap = {
+      interests: { val: newInterest, setter: setNewInterest },
+      techStack: { val: newTech, setter: setNewTech },
+      highlights: { val: newHighlight, setter: setNewHighlight },
+    };
+    const { val, setter } = inputMap[field];
+    if (!val.trim()) return;
+    updateField(field, [...form[field], val.trim()]);
+    setter('');
+  };
+
+  const removeListItem = (field, index) => {
+    updateField(field, form[field].filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (editing) {
-        await api.put(`/about/${editing}`, form);
-      } else {
-        await api.post('/about', form);
-      }
-      setShowForm(false);
-      load();
+      const { data } = await api.put('/profile', form);
+      setProfile(data);
+      alert('Saved successfully');
     } catch (err) {
-      alert(err.response?.data?.message || 'Error');
+      alert(err.response?.data?.message || 'Error saving');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm('Delete this item?')) return;
-    await api.delete(`/about/${id}`);
-    load();
-  };
-
-  const handlePhotoUpload = async (e) => {
-    e.preventDefault();
-    if (!photoFile) return;
-    setPhotoUploading(true);
-    try {
-      const fd = new FormData();
-      fd.append('photo', photoFile);
-      const { data } = await api.post('/profile/photo', fd);
-      setProfile(data);
-      setPhotoFile(null);
-    } catch (err) {
-      alert(err.response?.data?.message || 'Upload failed');
-    } finally {
-      setPhotoUploading(false);
-    }
-  };
-
-  const handleBioSave = async () => {
-    setBioSaving(true);
-    try {
-      const { data } = await api.put('/profile', { bio });
-      setProfile(data);
-    } catch (err) {
-      alert(err.response?.data?.message || 'Failed to save bio');
-    } finally {
-      setBioSaving(false);
-    }
-  };
+  if (!profile) return <div className="text-center py-16 text-muted">Loading...</div>;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-8">About Me</h1>
+      <h1 className="text-2xl font-bold mb-8">About Section</h1>
 
-      {/* Profile Photo Section */}
-      <div className="glass rounded-2xl p-6 mb-8">
-        <h2 className="text-lg font-semibold mb-4">Profile Photo</h2>
-        <div className="flex flex-col sm:flex-row items-start gap-6">
-          <div className="w-40 h-48 rounded-2xl overflow-hidden border border-glass/10 bg-glass/5 flex items-center justify-center shrink-0">
-            {profile?.photo ? (
-              <img src={API_ORIGIN + profile.photo} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <User size={40} className="text-muted/40" />
-            )}
-          </div>
-          <form onSubmit={handlePhotoUpload} className="flex flex-col gap-3 flex-1">
-            <input
-              type="file"
-              onChange={(e) => setPhotoFile(e.target.files[0])}
-              accept=".jpg,.jpeg,.png,.webp"
-              className="w-full text-sm text-muted file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
-            />
-            <p className="text-xs text-muted">Accepted: .jpg, .jpeg, .png, .webp &bull; Max 5MB</p>
-            <button
-              type="submit"
-              disabled={!photoFile || photoUploading}
-              className="self-start flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all disabled:opacity-50"
-            >
-              {photoUploading ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
-              Upload Photo
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* Bio Section */}
-      <div className="glass rounded-2xl p-6 mb-8">
-        <h2 className="text-lg font-semibold mb-4">Bio</h2>
-        <textarea
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          placeholder="Write a short bio about yourself..."
-          rows={4}
-          className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none mb-4"
-        />
-        <button
-          onClick={handleBioSave}
-          disabled={bioSaving}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all disabled:opacity-50"
-        >
-          {bioSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-          Save Bio
-        </button>
-      </div>
-
-      {/* Highlights CRUD */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold">Highlights</h2>
-        <button onClick={openCreate} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/20 text-primary text-sm font-medium hover:bg-primary/30 transition-all">
-          <Plus size={18} /> Add Highlight
-        </button>
-      </div>
-
-      {showForm && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4" onClick={() => setShowForm(false)}>
-          <div className="glass rounded-3xl p-8 w-full max-w-lg" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold">{editing ? 'Edit Highlight' : 'New Highlight'}</h2>
-              <button onClick={() => setShowForm(false)}><X size={20} /></button>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Header Fields */}
+        <div className="glass rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Header</h2>
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs text-muted font-medium mb-1.5 block">Small Label</label>
+              <input
+                value={form.smallLabel}
+                onChange={e => updateField('smallLabel', e.target.value)}
+                placeholder="ABOUT ME"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+              />
             </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} placeholder="Title" required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm" />
-              <textarea value={form.description} onChange={(e) => setForm({...form, description: e.target.value})} placeholder="Description" rows={3} required className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none" />
-              <select value={form.icon} onChange={(e) => setForm({...form, icon: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main focus:outline-none focus:border-primary/50 text-sm">
-                {iconOptions.map((icon) => (
-                  <option key={icon} value={icon} className="bg-dark">{icon}</option>
-                ))}
-              </select>
-              <button type="submit" disabled={loading} className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50">
-                {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-                {editing ? 'Update' : 'Create'}
-              </button>
-            </form>
+            <div>
+              <label className="text-xs text-muted font-medium mb-1.5 block">Main Heading</label>
+              <input
+                value={form.heading}
+                onChange={e => updateField('heading', e.target.value)}
+                placeholder="Building Software That Solves Problems"
+                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+              />
+            </div>
           </div>
         </div>
-      )}
 
-      <div className="glass rounded-2xl overflow-hidden">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-glass/5">
-              <th className="text-left py-4 px-5 text-muted font-medium">Icon</th>
-              <th className="text-left py-4 px-5 text-muted font-medium">Title</th>
-              <th className="text-left py-4 px-5 text-muted font-medium hidden md:table-cell">Description</th>
-              <th className="text-right py-4 px-5 text-muted font-medium">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <tr key={item._id} className="border-b border-glass/5 hover:bg-glass/5">
-                <td className="py-4 px-5">
-                  <span className="px-2 py-1 rounded bg-glass/5 text-xs font-mono text-primary">{item.icon}</span>
-                </td>
-                <td className="py-4 px-5 font-medium">{item.title}</td>
-                <td className="py-4 px-5 hidden md:table-cell text-muted max-w-xs truncate">{item.description}</td>
-                <td className="py-4 px-5 text-right">
-                  <button onClick={() => openEdit(item)} className="p-2 hover:text-primary transition-colors"><Pencil size={16} /></button>
-                  <button onClick={() => handleDelete(item._id)} className="p-2 hover:text-red-400 transition-colors"><Trash2 size={16} /></button>
-                </td>
-              </tr>
+        {/* Bio */}
+        <div className="glass rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Bio</h2>
+          <textarea
+            value={form.bio}
+            onChange={e => updateField('bio', e.target.value)}
+            placeholder="Write a short bio about yourself..."
+            rows={4}
+            className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm resize-none"
+          />
+        </div>
+
+        {/* Education */}
+        <div className="glass rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Education</h2>
+          <div className="space-y-4 mb-4">
+            {form.education.map((item, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="flex-1 space-y-2">
+                  <input
+                    value={item.degree}
+                    onChange={e => {
+                      const updated = [...form.education];
+                      updated[i] = { ...updated[i], degree: e.target.value };
+                      updateField('education', updated);
+                    }}
+                    placeholder="Degree"
+                    className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+                  />
+                  <input
+                    value={item.institution}
+                    onChange={e => {
+                      const updated = [...form.education];
+                      updated[i] = { ...updated[i], institution: e.target.value };
+                      updateField('education', updated);
+                    }}
+                    placeholder="Institution"
+                    className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => updateField('education', form.education.filter((_, j) => j !== i))}
+                  className="mt-2 p-2 rounded-lg hover:bg-red-500/10 text-muted hover:text-red-400 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             ))}
-            {!items.length && (
-              <tr><td colSpan={4} className="py-12 text-center text-muted">No highlights yet</td></tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => updateField('education', [...form.education, { degree: '', institution: '' }])}
+            className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+          >
+            <Plus size={16} /> Add Education
+          </button>
+        </div>
+
+        {/* Experience */}
+
+          <div className="glass rounded-2xl p-6">
+            <h2 className="text-lg font-semibold mb-4">Experience</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs text-muted font-medium mb-1.5 block">Role</label>
+                <input
+                  value={form.experienceRole}
+                  onChange={e => updateField('experienceRole', e.target.value)}
+                  placeholder="Full-Stack Developer"
+                  className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-muted font-medium mb-1.5 block">Company</label>
+                <input
+                  value={form.experienceCompany}
+                  onChange={e => updateField('experienceCompany', e.target.value)}
+                  placeholder="Tech Corp"
+                  className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+                />
+              </div>
+            </div>
+        </div>
+
+        {/* Interests */}
+        <div className="glass rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Interests</h2>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {form.interests.map((item, i) => (
+              <span key={i} className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary">
+                {item}
+                <button type="button" onClick={() => removeListItem('interests', i)} className="hover:text-red-400">
+                  <X size={12} />
+                </button>
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={newInterest}
+              onChange={e => setNewInterest(e.target.value)}
+              placeholder="Add an interest..."
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addListItem('interests'); } }}
+              className="flex-1 px-4 py-2 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+            />
+            <button type="button" onClick={() => addListItem('interests')} className="px-4 py-2 rounded-xl bg-primary/20 text-primary hover:bg-primary/30 transition-all">
+              <Plus size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="glass rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Tech Stack</h2>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {form.techStack.map((item, i) => (
+              <span key={i} className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full bg-primary/10 text-primary">
+                {item}
+                <button type="button" onClick={() => removeListItem('techStack', i)} className="hover:text-red-400">
+                  <X size={12} />
+                </button>
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={newTech}
+              onChange={e => setNewTech(e.target.value)}
+              placeholder="Add a tech..."
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addListItem('techStack'); } }}
+              className="flex-1 px-4 py-2 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+            />
+            <button type="button" onClick={() => addListItem('techStack')} className="px-4 py-2 rounded-xl bg-primary/20 text-primary hover:bg-primary/30 transition-all">
+              <Plus size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Highlights */}
+        <div className="glass rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Highlights</h2>
+          <div className="space-y-2 mb-3">
+            {form.highlights.map((item, i) => (
+              <div key={i} className="flex items-center gap-2 text-sm text-muted">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                <span className="flex-1">{item}</span>
+                <button type="button" onClick={() => removeListItem('highlights', i)} className="hover:text-red-400 shrink-0">
+                  <X size={14} />
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={newHighlight}
+              onChange={e => setNewHighlight(e.target.value)}
+              placeholder="Add a highlight..."
+              onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addListItem('highlights'); } }}
+              className="flex-1 px-4 py-2 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
+            />
+            <button type="button" onClick={() => addListItem('highlights')} className="px-4 py-2 rounded-xl bg-primary/20 text-primary hover:bg-primary/30 transition-all">
+              <Plus size={18} />
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+        >
+          {loading ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
+          Save All Changes
+        </button>
+      </form>
     </div>
   );
 }
