@@ -14,6 +14,13 @@ function getDateRange() {
   };
 }
 
+function getDateRangeForYear(year) {
+  return {
+    from: `${year}-01-01T00:00:00Z`,
+    to: `${year}-12-31T23:59:59Z`,
+  };
+}
+
 function calculateStreaks(weeks) {
   const days = weeks
     .flatMap(w => w.contributionDays)
@@ -129,10 +136,10 @@ function formatEvent(event) {
   }
 }
 
-async function fetchAllGitHubData() {
+async function fetchAllGitHubData(year) {
   const token = process.env.GITHUB_TOKEN;
   const headers = { Authorization: `Bearer ${token}` };
-  const { from, to } = getDateRange();
+  const { from, to } = year ? getDateRangeForYear(year) : getDateRange();
 
   // 1. GraphQL — contribution calendar, pinned repos, user stats
   const graphqlQuery = {
@@ -236,8 +243,11 @@ async function fetchAllGitHubData() {
 }
 
 export const getGitHubData = async (req, res) => {
+  const year = req.query.year || null;
+  const cacheKey = year ? `main-${year}` : 'main';
+
   try {
-    let cache = await GitHubCache.findOne({ key: 'main' });
+    let cache = await GitHubCache.findOne({ key: cacheKey });
     const now = Date.now();
 
     const isStale = !cache || !cache.lastSynced ||
@@ -245,14 +255,14 @@ export const getGitHubData = async (req, res) => {
 
     if (isStale) {
       try {
-        const data = await fetchAllGitHubData();
+        const data = await fetchAllGitHubData(year);
         if (cache) {
           cache.data = data;
           cache.lastSynced = new Date();
           await cache.save();
         } else {
           cache = await GitHubCache.create({
-            key: 'main',
+            key: cacheKey,
             data,
             lastSynced: new Date(),
           });
@@ -272,7 +282,7 @@ export const getGitHubData = async (req, res) => {
     });
   } catch (err) {
     console.error('GitHub controller error:', err.message);
-    const cache = await GitHubCache.findOne({ key: 'main' });
+    const cache = await GitHubCache.findOne({ key: cacheKey });
     if (cache && cache.data) {
       return res.json({ data: cache.data, lastSynced: cache.lastSynced });
     }
