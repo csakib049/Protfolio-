@@ -18,22 +18,6 @@ const themes = [
   { id: 'crayola-red', label: 'Red (Crayola)', color: '#ed254e', group: 'Dark' },
   { id: 'dracula', label: 'Dracula', color: '#ff79c6', group: 'Dark' },
   { id: 'nord', label: 'Nord', color: '#88c0d0', group: 'Dark' },
-  { id: 'light-green', label: 'Light Green', color: '#16a34a', group: 'Light' },
-  { id: 'light-cyan', label: 'Light Cyan', color: '#0891b2', group: 'Light' },
-  { id: 'light-maroon', label: 'Light Maroon', color: '#9f1239', group: 'Light' },
-  { id: 'light-orange', label: 'Light Orange', color: '#ea580c', group: 'Light' },
-  { id: 'light-red', label: 'Light Red', color: '#dc2626', group: 'Light' },
-  { id: 'light-purple', label: 'Light Purple', color: '#9333ea', group: 'Light' },
-  { id: 'light-pink', label: 'Light Pink', color: '#db2777', group: 'Light' },
-  { id: 'light-violet', label: 'Light Violet', color: '#7c3aed', group: 'Light' },
-  { id: 'light-blue', label: 'Light Blue', color: '#2563eb', group: 'Light' },
-  { id: 'solarized-dark', label: 'Solarized Dark', color: '#2aa198', group: 'Presets' },
-  { id: 'solarized-light', label: 'Solarized Light', color: '#268bd2', group: 'Presets' },
-  { id: 'monokai', label: 'Monokai', color: '#a6e22e', group: 'Presets' },
-  { id: 'one-dark', label: 'One Dark', color: '#61afef', group: 'Presets' },
-  { id: 'tokyo-night', label: 'Tokyo Night', color: '#7aa2f7', group: 'Presets' },
-  { id: 'catppuccin-mocha', label: 'Catppuccin Mocha', color: '#cba6f7', group: 'Presets' },
-  { id: 'catppuccin-latte', label: 'Catppuccin Latte', color: '#8839ef', group: 'Presets' },
 ];
 
 export default function AdminDashboard() {
@@ -128,7 +112,7 @@ export default function AdminDashboard() {
           Choose a color theme for your portfolio website.
         </p>
         <div className="flex flex-wrap gap-4">
-          {['Dark', 'Light', 'Presets'].map((group) => {
+          {['Dark'].map((group) => {
             const groupThemes = themes.filter((t) => t.group === group);
             if (!groupThemes.length) return null;
             return (
