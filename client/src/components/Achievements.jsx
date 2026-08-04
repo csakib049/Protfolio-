@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Star, BarChart3, Trophy } from 'lucide-react';
 import DecryptedText from './DecryptedText';
 import Lightbox from './Lightbox';
+import RoseThree from './RoseThree';
 import api, { API_ORIGIN } from '@/api';
 
 function ImpactDots({ level }) {
@@ -23,6 +24,7 @@ function ImpactDots({ level }) {
 
 export default function Achievements() {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [animKey, setAnimKey] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const ref = useRef(null);
@@ -33,7 +35,10 @@ export default function Achievements() {
   }, []);
 
   useEffect(() => {
-    api.get('/achievements').then(({ data }) => setItems(data)).catch(() => {});
+    api.get('/achievements')
+      .then(({ data }) => setItems(data))
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -189,7 +194,13 @@ export default function Achievements() {
               </div>
             </motion.div>
           ))}
-          {!items.length && (
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-16 gap-6 reveal">
+              <RoseThree size={200} className="text-primary" />
+              <p className="text-sm text-muted tracking-wider uppercase">Loading Achievements…</p>
+            </div>
+          )}
+          {!loading && !items.length && (
             <div className="text-center py-16 text-muted reveal">
               <Trophy size={48} className="mx-auto mb-4 opacity-30" />
               <p>No achievements yet</p>
