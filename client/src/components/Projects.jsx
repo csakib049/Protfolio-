@@ -1,20 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import DecryptedText from './DecryptedText';
-import api, { API_ORIGIN } from '@/api';
+import projects from '@/data/projects.json';
+import { localAsset } from '@/data/assets';
 
 export default function Projects() {
-  const [projects, setProjects] = useState([]);
   const [animKey, setAnimKey] = useState(0);
   const ref = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    api.get('/projects').then((res) => setProjects(res.data)).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -65,7 +61,7 @@ export default function Projects() {
               <div className="relative h-48 overflow-hidden bg-glass/5">
                 {project.image ? (
                   <img
-                    src={API_ORIGIN + project.image}
+                    src={localAsset(project.image)}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />

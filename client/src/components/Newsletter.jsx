@@ -3,10 +3,11 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import DecryptedText from './DecryptedText';
 import Lightbox from './Lightbox';
-import api, { API_ORIGIN } from '@/api';
+import itemsData from '@/data/newsletter.json';
+import { localAsset } from '@/data/assets';
 
 export default function Newsletter() {
-  const [items, setItems] = useState([]);
+  const [items] = useState(Array.isArray(itemsData) ? itemsData : [itemsData]);
   const [animKey, setAnimKey] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const ref = useRef(null);
@@ -14,10 +15,6 @@ export default function Newsletter() {
   useEffect(() => {
     const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    api.get('/newsletter').then(({ data }) => setItems(data)).catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -89,13 +86,13 @@ export default function Newsletter() {
                 <div className="absolute -inset-2 bg-primary/10 rounded-2xl blur-[40px] opacity-50 pointer-events-none" />
                 {(() => {
                   const imgs = item.images || (item.image ? [item.image] : []);
-                  const fullUrls = imgs.map(u => API_ORIGIN + u);
+const fullUrls = imgs.map(localAsset);
                   return imgs.length === 1 ? (
                     <div className="relative rounded-xl overflow-hidden border border-glass/10 h-64 md:h-full bg-glass/5 cursor-pointer group"
                       onClick={() => setLightbox({ images: fullUrls, initialIndex: 0 })}
                     >
                       <img
-                        src={API_ORIGIN + imgs[0]}
+                        src={localAsset(imgs[0])}
                         alt={item.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
@@ -110,7 +107,7 @@ export default function Newsletter() {
                           onClick={() => setLightbox({ images: fullUrls, initialIndex: idx })}
                         >
                           <img
-                            src={API_ORIGIN + url}
+                            src={localAsset(url)}
                             alt={`${item.title} ${idx + 1}`}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />

@@ -4,7 +4,7 @@ import { Mail, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
 import DecryptedText from './DecryptedText';
-import api from '@/api';
+import settings from '@/data/settings.json';
 
 const terminalLines = [
   { command: 'whoami', output: 'Md. Sakib Chowdhury' },
@@ -57,23 +57,17 @@ const itemVariants = {
 
 export default function Hero() {
   const [animKey, setAnimKey] = useState(0);
-  const [resumeUrl, setResumeUrl] = useState('/cv.pdf');
+  const resumeUrl = settings.resume || '/cv.pdf';
 
   useEffect(() => {
     const timer = setInterval(() => setAnimKey(k => k + 1), 5000);
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    api.get('/settings').then(({ data }) => {
-      if (data?.resume) setResumeUrl(data.resume);
-    }).catch(() => {});
-  }, []);
-
   return (
     <section className="relative min-h-screen flex flex-col lg:flex-row">
       <img
-        src="/sakib_perfect.jpeg"
+        src="/sakib_perfect.webp"
         alt=""
         className="absolute inset-0 w-full h-full object-cover"
         style={{ objectPosition: 'center top' }}

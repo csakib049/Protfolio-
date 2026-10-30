@@ -1,15 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import api, { API_ORIGIN } from '@/api';
+import testimonials from '@/data/testimonials.json';
+import { localAsset } from '@/data/assets';
 
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState([]);
   const [current, setCurrent] = useState(0);
   const ref = useRef(null);
-
-  useEffect(() => {
-    api.get('/testimonials').then((res) => setTestimonials(res.data)).catch(() => {});
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -55,7 +51,7 @@ export default function Testimonials() {
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full glass-strong flex items-center justify-center text-xl flex-shrink-0">
               {t.avatar ? (
-                <img src={API_ORIGIN + t.avatar} alt={t.name} className="w-full h-full rounded-full object-cover" />
+                <img src={localAsset(t.avatar)} alt={t.name} className="w-full h-full rounded-full object-cover" loading="lazy" />
               ) : (
                 <span>{t.name.charAt(0)}</span>
               )}

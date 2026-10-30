@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { Github, Linkedin, Heart, X, Loader2, UserPlus } from 'lucide-react';
-import api from '@/api';
+import { Github, Linkedin, Heart } from 'lucide-react';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/csakib049', title: 'GitHub' },
@@ -35,33 +33,10 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const [showSignup, setShowSignup] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const handleDoubleClick = () => setShowSignup(true);
-
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage('');
-    try {
-      const { data } = await api.post('/auth/signup', form);
-      localStorage.setItem('token', data.token);
-      setMessage('Account created! You can now go to /admin');
-      setForm({ name: '', email: '', password: '' });
-    } catch (err) {
-      setMessage(err.response?.data?.message || err.message || 'Error creating account');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <>
       <img
-        src="/digitalSignature_icon.png"
+        src="/digitalSignature_icon.webp"
         alt="Signature"
         className="fixed bottom-6 left-6 z-40 h-36 w-auto opacity-60 hover:opacity-100 transition-all duration-300 hidden sm:block"
       />
@@ -71,7 +46,6 @@ export default function Footer() {
 
           <p
             className="text-sm text-muted flex items-center gap-1 cursor-default select-none"
-            onDoubleClick={handleDoubleClick}
           >
             Made with <Heart size={14} /> by <span className="text-primary">Sakib</span>
           </p>
@@ -93,54 +67,6 @@ export default function Footer() {
         </div>
       </footer>
 
-      {showSignup && (
-        <div
-          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4"
-          onClick={() => { setShowSignup(false); setMessage(''); }}
-        >
-          <div className="glass rounded-3xl p-8 w-full max-w-sm" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-semibold">Admin Sign Up</h2>
-              <button onClick={() => { setShowSignup(false); setMessage(''); }}><X size={20} /></button>
-            </div>
-            <form onSubmit={handleSignup} className="space-y-4">
-              <input
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="Name"
-                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
-              />
-              <input
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder="Email"
-                type="email"
-                required
-                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
-              />
-              <input
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                placeholder="Password"
-                type="password"
-                required
-                className="w-full px-4 py-3 rounded-xl bg-glass/5 border border-glass/10 text-main placeholder-muted focus:outline-none focus:border-primary/50 text-sm"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3 rounded-xl bg-primary/20 text-primary font-medium hover:bg-primary/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
-              >
-                {loading ? <Loader2 size={18} className="animate-spin" /> : <UserPlus size={18} />}
-                Create Admin Account
-              </button>
-              {message && (
-                <p className="text-sm text-center text-muted">{message}</p>
-              )}
-            </form>
-          </div>
-        </div>
-      )}
     </>
   );
 }

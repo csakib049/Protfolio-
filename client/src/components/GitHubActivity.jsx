@@ -4,7 +4,7 @@ import {
   Flame, Code, Clock, GitFork, ChevronRight,
 } from 'lucide-react';
 import DecryptedText from './DecryptedText';
-import api from '@/api';
+import githubYears from '@/data/github-years.json';
 
 const CELL = 10;
 const GAP = 2;
@@ -73,17 +73,14 @@ const YEAR_OPTIONS = [
   { value: 'last-year', label: 'Last year' },
   { value: '2025', label: '2025' },
   { value: '2024', label: '2024' },
-  { value: '2023', label: '2023' },
 ];
 
 export default function GitHubActivity() {
-  const [data, setData] = useState(null);
-  const [lastSynced, setLastSynced] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [selectedYear, setSelectedYear] = useState('last-year');
+  const [data, setData] = useState(githubYears['last-year']?.data ?? null);
+  const [lastSynced, setLastSynced] = useState(githubYears['last-year']?.lastSynced ?? null);
   const [tooltip, setTooltip] = useState(null);
   const [animKey, setAnimKey] = useState(0);
-  const [selectedYear, setSelectedYear] = useState('last-year');
-  const [yearCache, setYearCache] = useState({});
   const ref = useRef(null);
 
   useEffect(() => {
@@ -92,22 +89,9 @@ export default function GitHubActivity() {
   }, []);
 
   useEffect(() => {
-    if (yearCache[selectedYear]) {
-      setData(yearCache[selectedYear].data);
-      setLastSynced(yearCache[selectedYear].lastSynced);
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
-    const params = selectedYear === 'last-year' ? {} : { year: selectedYear };
-    api.get('/github', { params })
-      .then(({ data: res }) => {
-        setData(res.data);
-        setLastSynced(res.lastSynced);
-        setYearCache(prev => ({ ...prev, [selectedYear]: res }));
-      })
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    const snapshot = githubYears[selectedYear];
+    setData(snapshot?.data ?? null);
+    setLastSynced(snapshot?.lastSynced ?? null);
   }, [selectedYear]);
 
   useEffect(() => {
@@ -128,23 +112,6 @@ export default function GitHubActivity() {
     observer.observe(el);
     return () => observer.disconnect();
   }, [data]);
-
-  if (loading) {
-    return (
-      <section className="py-20 relative" ref={ref}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="animate-pulse space-y-6">
-            <div className="h-10 w-72 bg-glass/5 rounded-xl" />
-            <div className="h-5 w-44 bg-glass/5 rounded-xl" />
-            <div className="grid grid-cols-5 gap-3">
-              {[1,2,3,4,5].map(i => <div key={i} className="h-20 bg-glass/5 rounded-xl" />)}
-            </div>
-            <div className="h-40 bg-glass/5 rounded-2xl" />
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   if (!data) return null;
 

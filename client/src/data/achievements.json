@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "6a3280c7ee7e586519bc1f53",
+    "title": "Champion of MIndSpark-24 (project showcase)",
+    "description": "🏆 Champion – MindSpark'24 Project Showcase\r\n\r\nSecured 1st Place in the MindSpark'24 Project Showcase, competing against 25 teams. Our project was recognized for its innovation, technical implementation, and practical impact, demonstrating strong teamwork, problem-solving, and software development skills.",
+    "date": "December 15 , 2024",
+    "image": "/uploads/1781694663031-944713296.webp",
+    "order": 0,
+    "createdAt": "2026-06-17T11:11:03.044Z",
+    "updatedAt": "2026-07-25T11:50:33.145Z",
+    "__v": 0,
+    "category": "Competition",
+    "impactLevel": 5,
+    "status": "Project Showcasing",
+    "images": [
+      "/uploads/1781694663031-944713296.webp",
+      "/uploads/1784980233134-268609459.webp",
+      "/uploads/1784980233138-668143284.webp",
+      "/uploads/1784980233142-721962135.webp"
+    ]
+  },
+  {
+    "_id": "6a328944ee7e586519bc1fc1",
+    "title": "5th international robo tech olympiad",
+    "description": "Awarded 2nd Runner-Up in the Project Showcase (Senior Category) at the 5th International Robo Tech Olympiad 2025 for developing an innovative project and successfully competing against teams from multiple institutions.",
+    "date": "June 21 ,  2025",
+    "image": "/uploads/1781696836293-583280187.webp",
+    "order": 0,
+    "createdAt": "2026-06-17T11:47:16.314Z",
+    "updatedAt": "2026-07-25T11:52:03.269Z",
+    "__v": 0,
+    "category": "Competition",
+    "impactLevel": 4,
+    "status": "Project Showcasing",
+    "images": [
+      "/uploads/1781696836293-583280187.webp",
+      "/uploads/1784980323261-277738968.webp",
+      "/uploads/1784980323263-206391668.jpg",
+      "/uploads/1784980323266-144499700.webp"
+    ]
+  },
+  {
+    "_id": "6a328a79ee7e586519bc1fc6",
+    "title": "Brainstorming Week: Microcontroller Hardware Project Champion",
+    "description": "Brainstorming Week – Microcontroller Hardware Project Champion\r\nWon Champion in the Microcontroller & IoT-Based Hardware Research Project organized by the Department of CSE, BUBT. Developed the Mission Control System, demonstrating innovation in embedded systems, IoT integration, and collaborative engineering.",
+    "date": "April 21 , 2025",
+    "image": "/uploads/1781697145087-639847252.webp",
+    "order": 0,
+    "createdAt": "2026-06-17T11:52:25.111Z",
+    "updatedAt": "2026-07-25T11:53:15.425Z",
+    "__v": 0,
+    "category": "Competition",
+    "impactLevel": 5,
+    "status": "Project Showcasing",
+    "images": [
+      "/uploads/1781697145087-639847252.webp",
+      "/uploads/1784980395419-956847059.webp",
+      "/uploads/1784980395421-323440255.webp",
+      "/uploads/1784980395423-296221129.webp"
+    ]
+  },
+  {
+    "_id": "6a328b68ee7e586519bc1fc9",
+    "title": "NRC 3rd Runners-up ,2025",
+    "description": "🏆 NRC 2025 – 3rd Runners-up\r\nSecured 3rd Runners-up at the National Robotics Championship (NRC) 2025, competing against skilled teams nationwide. Collaborated to develop and present an innovative engineering solution, demonstrating technical expertise, teamwork, and creative problem-solving.",
+    "date": "February 19 , 2025 ",
+    "image": "/uploads/1781697384404-96524260.webp",
+    "order": 0,
+    "createdAt": "2026-06-17T11:56:24.406Z",
+    "updatedAt": "2026-07-25T11:54:44.565Z",
+    "__v": 0,
+    "category": "Competition",
+    "impactLevel": 4,
+    "status": "Project Showcasing",
+    "images": [
+      "/uploads/1781697384404-96524260.webp",
+      "/uploads/1784980484518-310170572.webp",
+      "/uploads/1784980484520-193999315.webp",
+      "/uploads/1784980484541-807251536.webp"
+    ]
+  }
+]

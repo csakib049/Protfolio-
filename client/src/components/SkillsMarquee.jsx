@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
 import DecryptedText from './DecryptedText';
-import api, { API_ORIGIN } from '@/api';
+import skills from '@/data/skills.json';
+import { localAsset } from '@/data/assets';
 
 export default function SkillsMarquee() {
-  const [skills, setSkills] = useState([]);
   const [animKey, setAnimKey] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    api.get('/skills').then((res) => setSkills(res.data)).catch(() => {});
   }, []);
 
   if (!skills.length) return null;
@@ -21,7 +17,7 @@ export default function SkillsMarquee() {
     <section
       className="relative min-h-screen flex items-center py-12 overflow-hidden"
       style={{
-        backgroundImage: 'url(/blur.png)',
+        backgroundImage: 'url(/blur.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
@@ -49,7 +45,7 @@ export default function SkillsMarquee() {
               className="glass rounded-full px-8 py-4 flex items-center gap-4 text-base font-medium text-black border-black hover:text-primary transition-colors"
             >
               {skill.logo ? (
-                <img src={API_ORIGIN + skill.logo} alt={skill.name} className="w-7 h-7 object-contain" />
+                <img src={localAsset(skill.logo)} alt={skill.name} className="w-7 h-7 object-contain" loading="lazy" />
               ) : (
                 <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center text-[10px] text-primary font-bold">
                   {skill.name.charAt(0).toUpperCase()}

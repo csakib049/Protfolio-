@@ -1,0 +1,61 @@
+{
+  "_id": "6a60ffe2351e437323b7387a",
+  "bio": "I'm a Computer Science student and Full Stack Developer with a strong focus on backend engineering, scalable system design, and AI-powered applications. I enjoy designing robust APIs, building modern web applications, and solving real-world problems through clean, maintainable code. As I continue learning and growing, my goal is to become a software engineer who builds reliable systems that make a meaningful impact.",
+  "photo": "/uploads/1784742719947-32091149.webp",
+  "createdAt": "2026-07-22T17:37:38.053Z",
+  "updatedAt": "2026-07-25T17:10:00.041Z",
+  "__v": 3,
+  "educationDegree": "B.Sc. in Computer Science",
+  "educationInstitution": "Bangladesh University of Business & Technology (BUBT)",
+  "experienceCompany": "",
+  "experienceRole": "",
+  "heading": "Building Software That Solves Problems",
+  "highlights": [
+    "MindSpark Champion",
+    "International Robo Tech Olympiad Runner-up",
+    "NRC 2025 Runner-up",
+    "Hardware Research Champion"
+  ],
+  "interests": [
+    "Backend",
+    "AI",
+    "System Design"
+  ],
+  "smallLabel": "ABOUT ME",
+  "techStack": [
+    "HTML",
+    "CSS",
+    "Javascript",
+    "React JS",
+    "Git",
+    "Github",
+    "Node JS",
+    "Express JS",
+    "Typescript",
+    "Tailwind",
+    "Mongodb",
+    "MySQL",
+    "C++",
+    "C",
+    "Java",
+    "Python",
+    "Docker"
+  ],
+  "education": [
+    {
+      "degree": "SSC",
+      "institution": "Monipur high school branch 1",
+      "_id": "6a64ede8d4d664e7bbc2d94c"
+    },
+    {
+      "degree": "HSC",
+      "institution": "BAF Shaheen College Kurmitola",
+      "_id": "6a64ede8d4d664e7bbc2d94d"
+    },
+    {
+      "degree": "B.Sc. in Computer Science",
+      "institution": "Bangladesh University of Business and Technology - BUBT",
+      "_id": "6a64ede8d4d664e7bbc2d94e"
+    }
+  ]
+}

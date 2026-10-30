@@ -1,0 +1,172 @@
+[
+  {
+    "_id": "6a30dc284bdae0206ea57ae7",
+    "name": "MySQL",
+    "category": "Database",
+    "logo": "/uploads/1784797527350-482019063.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:16:24.293Z",
+    "updatedAt": "2026-07-23T09:05:27.352Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a5a675be521a4b0a9b2908c",
+    "name": "Docker",
+    "category": "Tools",
+    "logo": "/uploads/1784795255325-938498503.webp",
+    "order": 0,
+    "createdAt": "2026-07-17T17:33:15.769Z",
+    "updatedAt": "2026-07-23T08:27:35.327Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30de394bdae0206ea57afe",
+    "name": "Github",
+    "category": "Tools",
+    "logo": "/uploads/1784795264526-865101124.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:25:13.999Z",
+    "updatedAt": "2026-07-23T08:27:44.528Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dca44bdae0206ea57af9",
+    "name": "C++",
+    "category": "Other",
+    "logo": "/uploads/1784795274835-168071630.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:18:28.887Z",
+    "updatedAt": "2026-07-23T08:27:54.836Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc9d4bdae0206ea57af6",
+    "name": "C",
+    "category": "Other",
+    "logo": "/uploads/1784795286600-900585779.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:18:21.771Z",
+    "updatedAt": "2026-07-23T08:28:06.611Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc7a4bdae0206ea57af3",
+    "name": "Java",
+    "category": "Other",
+    "logo": "/uploads/1784795304249-335884124.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:17:46.484Z",
+    "updatedAt": "2026-07-23T08:28:24.25Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc704bdae0206ea57af0",
+    "name": "Python",
+    "category": "Other",
+    "logo": "/uploads/1784795318037-289192310.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:17:36.9Z",
+    "updatedAt": "2026-07-23T08:28:38.038Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc624bdae0206ea57aed",
+    "name": "Express JS",
+    "category": "Backend",
+    "logo": "/uploads/1784795325971-372049362.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:17:22.822Z",
+    "updatedAt": "2026-07-23T08:28:45.972Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc364bdae0206ea57aea",
+    "name": "Node JS",
+    "category": "Backend",
+    "logo": "/uploads/1784795336728-359414969.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:16:38.464Z",
+    "updatedAt": "2026-07-23T08:28:56.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30db274bdae0206ea57ac5",
+    "name": "HTML",
+    "category": "Frontend",
+    "logo": "/uploads/1784795345079-751961799.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:12:07.231Z",
+    "updatedAt": "2026-07-23T08:29:05.08Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc1e4bdae0206ea57ae4",
+    "name": "Mongodb",
+    "category": "Database",
+    "logo": "/uploads/1784795356335-100228372.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:16:14.773Z",
+    "updatedAt": "2026-07-23T08:29:16.336Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dc144bdae0206ea57ae1",
+    "name": "React JS",
+    "category": "Frontend",
+    "logo": "/uploads/1784795368506-69336389.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:16:04.689Z",
+    "updatedAt": "2026-07-23T08:29:28.508Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dbcf4bdae0206ea57adc",
+    "name": "Git ",
+    "category": "Tools",
+    "logo": "/uploads/1784795378957-638141831.png",
+    "order": 0,
+    "createdAt": "2026-06-16T05:14:55.676Z",
+    "updatedAt": "2026-07-23T08:29:38.958Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30dba24bdae0206ea57ad9",
+    "name": "Typescript",
+    "category": "Frontend",
+    "logo": "/uploads/1784795394430-323969349.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:14:10.461Z",
+    "updatedAt": "2026-07-23T08:29:54.431Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30db934bdae0206ea57ad6",
+    "name": "Tailwind",
+    "category": "Frontend",
+    "logo": "/uploads/1784795402582-4075401.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:13:55.343Z",
+    "updatedAt": "2026-07-23T08:30:02.584Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30db874bdae0206ea57ad3",
+    "name": "Javascript",
+    "category": "Frontend",
+    "logo": "/uploads/1784795426413-478786369.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:13:43.893Z",
+    "updatedAt": "2026-07-23T08:30:26.414Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a30db7e4bdae0206ea57ad0",
+    "name": "CSS",
+    "category": "Frontend",
+    "logo": "/uploads/1784795445094-741978976.webp",
+    "order": 0,
+    "createdAt": "2026-06-16T05:13:34.809Z",
+    "updatedAt": "2026-07-23T08:30:45.096Z",
+    "__v": 0
+  }
+]

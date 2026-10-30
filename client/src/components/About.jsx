@@ -1,14 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, GraduationCap, Briefcase, Sparkles, Cpu, Award } from 'lucide-react';
-import api, { API_ORIGIN } from '@/api';
+import profile from '@/data/profile.json';
+import { localAsset } from '@/data/assets';
 
 export default function About() {
-  const [profile, setProfile] = useState(null);
   const ref = useRef(null);
-
-  useEffect(() => {
-    api.get('/profile').then(({ data }) => setProfile(data)).catch(() => {});
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -27,9 +23,7 @@ export default function About() {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [profile]);
-
-  if (!profile) return null;
+  }, []);
 
   const hasEducation = profile.education?.length > 0;
   const hasExperience = profile.experienceRole || profile.experienceCompany;
@@ -70,7 +64,7 @@ export default function About() {
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-[60px] opacity-60 pointer-events-none" />
               {profile.photo ? (
                 <img
-                  src={API_ORIGIN + profile.photo}
+                  src={localAsset(profile.photo)}
                   alt="Profile"
                   className="relative w-full h-72 sm:h-80 lg:h-[calc(100vh-12rem)] rounded-2xl shadow-lg border border-glass/10 object-cover"
                 />

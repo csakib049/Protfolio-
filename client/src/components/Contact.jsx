@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Mail, Phone, MapPin, Send, Code, Server, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Code, Server } from 'lucide-react';
 import { FaLinkedin, FaGithub, FaInstagram, FaFacebook, FaDiscord } from 'react-icons/fa';
-import api from '@/api';
 
 const helpItems = [
   { icon: Code, title: 'Web Development', desc: 'Full-stack applications, React, Node.js, and more' },
@@ -11,8 +10,6 @@ const helpItems = [
 export default function Contact() {
   const ref = useRef(null);
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState({ type: '', text: '' });
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -31,19 +28,11 @@ export default function Contact() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus({ type: '', text: '' });
-    try {
-      await api.post('/messages', form);
-      setStatus({ type: 'success', text: 'Message sent successfully!' });
-      setForm({ name: '', email: '', subject: '', message: '' });
-    } catch {
-      setStatus({ type: 'error', text: 'Failed to send message. Please try again.' });
-    } finally {
-      setLoading(false);
-    }
+    const subject = encodeURIComponent(form.subject || `Portfolio message from ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`);
+    window.location.href = `mailto:csakib049@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -51,7 +40,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 relative bg-dark" ref={ref}>
       <img
-        src="/bottom_background.png"
+        src="/bottom_background.webp"
         alt=""
         className="absolute bottom-0 left-0 w-full h-full object-cover pointer-events-none"
         style={{ objectPosition: '50% 25%' }}
@@ -213,28 +202,14 @@ export default function Contact() {
 
               <button
                 type="submit"
-                disabled={loading}
                 className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-sm tracking-wider hover:brightness-110 active:scale-[0.98] transition-all duration-300 disabled:opacity-60 flex items-center justify-center gap-2"
               >
-                {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={16} />}
-                {loading ? 'Sending...' : 'Send Message'}
+                <Send size={16} />
+                Send Message
               </button>
 
-              {status.text && (
-                <div
-                  className={`flex items-center gap-2 text-sm px-4 py-3 rounded-xl ${
-                    status.type === 'success'
-                      ? 'bg-primary/10 text-primary'
-                      : 'bg-red-500/10 text-red-400'
-                  }`}
-                >
-                  {status.type === 'success' ? <CheckCircle size={16} /> : <AlertCircle size={16} />}
-                  {status.text}
-                </div>
-              )}
-
               <p className="text-[11px] text-muted/50 text-center">
-                This form is secured and your information is protected.
+                Your email app will open with your message ready to send.
               </p>
             </form>
           </div>
@@ -243,7 +218,7 @@ export default function Contact() {
           <div className="reveal order-2 lg:order-3">
             <div className="glass rounded-2xl overflow-hidden h-full">
               <img
-                src="/panjabi.jpeg"
+                src="/panjabi.webp"
                 alt="Contact"
                 className="w-full h-72 sm:h-96 lg:h-full lg:min-h-[600px] object-cover"
               />

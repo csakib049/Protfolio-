@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "6a36a0ac8234f14d00f10adf",
+    "title": "Advanced Backend Project Bank Transaction System",
+    "description": "A backend bank transaction system built with Node.js, Express, and MongoDB that uses a double-entry ledger to track every transfer as an immutable, auditable record instead of a simple balance field. ",
+    "image": "/uploads/1781964972627-613688353.webp",
+    "tags": [
+      "[]"
+    ],
+    "github": "https://github.com/csakib049/-Advanced-Backend-Project-Bank-Transaction-System-with-Node.js-Express-MongoDB-.git",
+    "live": "",
+    "order": 0,
+    "createdAt": "2026-06-20T14:16:12.656Z",
+    "updatedAt": "2026-07-25T16:25:10.485Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a60f827ec043584a470c910",
+    "title": "Medusa AI",
+    "description": "Medusa AI is a code explanation tool that helps you understand code in any programming language. Paste your code, select the language, and get a detailed breakdown.",
+    "image": "/uploads/1784739879431-705802578.webp",
+    "tags": [
+      "[]"
+    ],
+    "github": "https://github.com/csakib049/Medusa-AI.git",
+    "live": "https://medusa-ai-front.onrender.com/",
+    "order": 0,
+    "createdAt": "2026-07-22T17:04:39.437Z",
+    "updatedAt": "2026-07-22T17:04:39.437Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a60f89fec043584a470c921",
+    "title": "Nutrinova",
+    "description": "AI-Assisted Diet Tracker & Meal Planner — a full-stack MERN application.",
+    "image": "/uploads/1784739999551-318637202.webp",
+    "tags": [
+      "[]"
+    ],
+    "github": "https://github.com/csakib049/NutriNova-.git",
+    "live": "https://nutrinova-frontend.onrender.com/",
+    "order": 0,
+    "createdAt": "2026-07-22T17:06:39.553Z",
+    "updatedAt": "2026-07-22T17:06:39.553Z",
+    "__v": 0
+  }
+]

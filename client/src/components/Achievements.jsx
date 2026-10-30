@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Star, BarChart3, Trophy } from 'lucide-react';
 import DecryptedText from './DecryptedText';
 import Lightbox from './Lightbox';
-import RoseThree from './RoseThree';
-import api, { API_ORIGIN } from '@/api';
+import achievements from '@/data/achievements.json';
+import { localAsset } from '@/data/assets';
 
 function ImpactDots({ level }) {
   return (
@@ -23,8 +23,7 @@ function ImpactDots({ level }) {
 }
 
 export default function Achievements() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [items] = useState(achievements);
   const [animKey, setAnimKey] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const ref = useRef(null);
@@ -32,13 +31,6 @@ export default function Achievements() {
   useEffect(() => {
     const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    api.get('/achievements')
-      .then(({ data }) => setItems(data))
-      .catch(() => {})
-      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -97,13 +89,13 @@ export default function Achievements() {
                 <div className="absolute -inset-2 bg-primary/10 rounded-2xl blur-[40px] opacity-50 pointer-events-none" />
                 {(() => {
                   const imgs = item.images || (item.image ? [item.image] : []);
-                  const fullUrls = imgs.map(u => API_ORIGIN + u);
+const fullUrls = imgs.map(localAsset);
                   return imgs.length === 1 ? (
                     <div className="relative rounded-xl overflow-hidden border border-glass/10 h-64 md:h-full bg-glass/5 cursor-pointer group"
                       onClick={() => setLightbox({ images: fullUrls, initialIndex: 0 })}
                     >
                       <img
-                        src={API_ORIGIN + imgs[0]}
+                        src={localAsset(imgs[0])}
                         alt={item.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
@@ -123,7 +115,7 @@ export default function Achievements() {
                           onClick={() => setLightbox({ images: fullUrls, initialIndex: idx })}
                         >
                           <img
-                            src={API_ORIGIN + url}
+                            src={localAsset(url)}
                             alt={`${item.title} ${idx + 1}`}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
@@ -194,13 +186,7 @@ export default function Achievements() {
               </div>
             </motion.div>
           ))}
-          {loading && (
-            <div className="flex flex-col items-center justify-center py-16 gap-6 reveal">
-              <RoseThree size={200} className="text-primary" />
-              <p className="text-sm text-muted tracking-wider uppercase">Loading Achievements…</p>
-            </div>
-          )}
-          {!loading && !items.length && (
+          {!items.length && (
             <div className="text-center py-16 text-muted reveal">
               <Trophy size={48} className="mx-auto mb-4 opacity-30" />
               <p>No achievements yet</p>

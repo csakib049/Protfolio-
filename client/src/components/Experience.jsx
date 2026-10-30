@@ -1,13 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
-import api from '@/api';
+import { useEffect, useRef } from 'react';
+import experiences from '@/data/experiences.json';
 
 export default function Experience() {
-  const [experiences, setExperiences] = useState([]);
   const ref = useRef(null);
-
-  useEffect(() => {
-    api.get('/experiences').then((res) => setExperiences(res.data)).catch(() => {});
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -26,7 +21,7 @@ export default function Experience() {
     );
     if (el) observer.observe(el);
     return () => observer.disconnect();
-  }, [experiences]);
+  }, []);
 
   if (!experiences.length) return null;
 

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import api from '../api';
+import settings from '@/data/settings.json';
 
 const ThemeContext = createContext();
 
@@ -28,31 +28,16 @@ function applyFont(font) {
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('portfolio-theme') || 'orange';
+    const saved = localStorage.getItem('portfolio-theme') || settings.theme || 'orange';
     applyTheme(saved);
     return saved;
   });
 
   const [font, setFont] = useState(() => {
-    const saved = localStorage.getItem('portfolio-font') || 'inter';
+    const saved = localStorage.getItem('portfolio-font') || settings.font || 'inter';
     applyFont(saved);
     return saved;
   });
-
-  useEffect(() => {
-    api.get('/settings').then(({ data }) => {
-      if (data) {
-        if (data.theme) {
-          setTheme(data.theme);
-          applyTheme(data.theme);
-        }
-        if (data.font) {
-          setFont(data.font);
-          applyFont(data.font);
-        }
-      }
-    }).catch(() => {});
-  }, []);
 
   useEffect(() => {
     applyTheme(theme);
@@ -62,20 +47,14 @@ export function ThemeProvider({ children }) {
     applyFont(font);
   }, [font]);
 
-  const updateTheme = async (newTheme) => {
+  const updateTheme = (newTheme) => {
     setTheme(newTheme);
     applyTheme(newTheme);
-    try {
-      await api.put('/settings', { theme: newTheme });
-    } catch {}
   };
 
-  const updateFont = async (newFont) => {
+  const updateFont = (newFont) => {
     setFont(newFont);
     applyFont(newFont);
-    try {
-      await api.put('/settings', { font: newFont });
-    } catch {}
   };
 
   return (
