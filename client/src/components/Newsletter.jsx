@@ -8,14 +8,8 @@ import { localAsset } from '@/data/assets';
 
 export default function Newsletter() {
   const [items] = useState(Array.isArray(itemsData) ? itemsData : [itemsData]);
-  const [animKey, setAnimKey] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const ref = useRef(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -48,7 +42,6 @@ export default function Newsletter() {
         <div className="text-center mb-16 reveal">
           <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
             <DecryptedText
-              key={animKey}
               text="NEWSLETTER"
               animateOn="view"
               sequential

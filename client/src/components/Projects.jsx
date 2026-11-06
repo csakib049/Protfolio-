@@ -4,14 +4,52 @@ import DecryptedText from './DecryptedText';
 import projects from '@/data/projects.json';
 import { localAsset } from '@/data/assets';
 
-export default function Projects() {
-  const [animKey, setAnimKey] = useState(0);
-  const ref = useRef(null);
+function ProjectVideo({ project, className }) {
+  const videoRef = useRef(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [isNearViewport, setIsNearViewport] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
-    return () => clearInterval(timer);
+    const video = videoRef.current;
+    if (!video) return;
+    if (!('IntersectionObserver' in window)) {
+      setHasLoaded(true);
+      setIsNearViewport(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setHasLoaded(true);
+        setIsNearViewport(true);
+        if (video.currentSrc) video.play().catch(() => {});
+      } else {
+        setIsNearViewport(false);
+        video.pause();
+      }
+    }, { rootMargin: '120px' });
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={hasLoaded ? localAsset(project.video) : undefined}
+      poster={localAsset(project.image)}
+      className={className}
+      muted
+      loop
+      playsInline
+      autoPlay={isNearViewport}
+      preload="none"
+      aria-label={`${project.title} project preview`}
+    />
+  );
+}
+
+export default function Projects() {
+  const ref = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
@@ -40,7 +78,6 @@ export default function Projects() {
         <div className="text-center mb-16 reveal">
           <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
             <DecryptedText
-              key={animKey}
               text="PROJECTS"
               animateOn="view"
               sequential
@@ -59,7 +96,12 @@ export default function Projects() {
               className="reveal group glass rounded-2xl overflow-hidden hover:bg-glass/5 transition-all duration-500"
             >
               <div className="relative h-48 overflow-hidden bg-glass/5">
-                {project.image ? (
+                {project.video ? (
+                  <ProjectVideo
+                    project={project}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                ) : project.image ? (
                   <img
                     src={localAsset(project.image)}
                     alt={project.title}
@@ -70,18 +112,6 @@ export default function Projects() {
                     🖥️
                   </div>
                 )}
-                <div className="absolute inset-0 bg-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="p-3 glass rounded-full hover:text-primary transition-colors">
-                      <Github size={20} />
-                    </a>
-                  )}
-                  {project.live && (
-                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-3 glass rounded-full hover:text-primary transition-colors">
-                      <ExternalLink size={20} />
-                    </a>
-                  )}
-                </div>
               </div>
 
               <div className="p-5">
@@ -96,6 +126,24 @@ export default function Projects() {
                     ))}
                   </div>
                 )}
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-glass/10 bg-glass/5 px-3 py-2.5 text-sm font-medium text-main hover:border-primary/40 hover:text-primary transition-colors"
+                  >
+                    <Github size={16} /> GitHub
+                  </a>
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-3 py-2.5 text-sm font-semibold text-white hover:brightness-110 transition-all"
+                  >
+                    <ExternalLink size={16} /> Live
+                  </a>
+                </div>
               </div>
             </div>
           ))}

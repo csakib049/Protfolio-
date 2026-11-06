@@ -1,5 +1,4 @@
 import Navbar from '@/components/Navbar';
-import FloatingDots from '@/components/FloatingDots';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import SkillsMarquee from '@/components/SkillsMarquee';
@@ -13,20 +12,19 @@ import Newsletter from '@/components/Newsletter';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
-import ClickSpark from '@/components/ClickSpark';
+import ScrollVelocity from '@/components/ScrollVelocity';
+import skills from '@/data/skills.json';
+
+const skillNames = skills.map(({ name }) => name.trim()).filter(Boolean);
+const skillRows = [skillNames.join(' • ')].filter(Boolean);
 
 export default function Home() {
   return (
-    <ClickSpark
-      sparkColor="#a855f7"
-      sparkSize={12}
-      sparkRadius={20}
-      sparkCount={10}
-      duration={500}
-    >
     <div className="relative min-h-screen bg-dark overflow-hidden">
-      <FloatingDots />
       <Navbar />
+      <div className="pt-[4.25rem]">
+        <ScrollVelocity texts={skillRows} velocity={32} />
+      </div>
       <Hero />
       <About />
       <SkillsMarquee />
@@ -41,6 +39,5 @@ export default function Home() {
       <Footer />
       <BackToTop />
     </div>
-    </ClickSpark>
   );
 }

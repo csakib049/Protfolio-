@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
@@ -56,13 +55,7 @@ const itemVariants = {
 };
 
 export default function Hero() {
-  const [animKey, setAnimKey] = useState(0);
   const resumeUrl = settings.resume || '/cv.pdf';
-
-  useEffect(() => {
-    const timer = setInterval(() => setAnimKey(k => k + 1), 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col lg:flex-row">
@@ -193,7 +186,7 @@ export default function Hero() {
           variants={itemVariants}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4 text-main"
         >
-          <DecryptedText key={animKey} text="Hi, I'm Sakib" animateOn="view" sequential revealDirection="start" className="text-primary glow-text" encryptedClassName="text-primary/40" />
+          <DecryptedText text="Hi, I'm Sakib" animateOn="view" sequential revealDirection="start" className="text-primary glow-text" encryptedClassName="text-primary/40" />
           <span className="inline-block ml-2">👋</span>
         </motion.h1>
 

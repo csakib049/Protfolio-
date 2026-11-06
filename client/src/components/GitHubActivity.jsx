@@ -80,13 +80,7 @@ export default function GitHubActivity() {
   const [data, setData] = useState(githubYears['last-year']?.data ?? null);
   const [lastSynced, setLastSynced] = useState(githubYears['last-year']?.lastSynced ?? null);
   const [tooltip, setTooltip] = useState(null);
-  const [animKey, setAnimKey] = useState(0);
   const ref = useRef(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const snapshot = githubYears[selectedYear];
@@ -117,7 +111,7 @@ export default function GitHubActivity() {
 
   const {
     totalRepos, totalCommits, totalPRs, totalStars, followers,
-    contributionCalendar, pinnedItems, languageStats, streaks,
+    contributionCalendar, pinnedItems, languageStats, streaks, recentActivity,
   } = data;
 
   const weeks = contributionCalendar?.weeks || [];
@@ -166,7 +160,6 @@ export default function GitHubActivity() {
             <span className="text-primary font-bold text-xl leading-none font-mono">&gt;_</span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-none">
               <DecryptedText
-                key={animKey}
                 text="GITHUB ACTIVITY"
                 animateOn="view"
                 sequential
@@ -343,6 +336,32 @@ export default function GitHubActivity() {
                           <span className="text-[10px] text-muted">{repo.stargazerCount || 0}</span>
                         </div>
                       </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {recentActivity?.length > 0 && (
+              <div className="glass rounded-2xl p-4 reveal">
+                <div className="flex items-center gap-2 mb-4">
+                  <Clock size={16} className="text-primary" />
+                  <h3 className="text-sm font-semibold text-white">Recent Activity</h3>
+                </div>
+                <div className="space-y-3">
+                  {recentActivity.slice(0, 8).map((activity) => (
+                    <a
+                      key={activity.id}
+                      href={`https://github.com/${activity.repo}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start gap-3 rounded-lg hover:bg-white/5 p-2 -mx-2 transition-colors"
+                    >
+                      <span className="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-xs text-main leading-relaxed">{activity.text}</span>
+                        <span className="block text-[10px] text-muted mt-1">{timeAgo(activity.createdAt)}</span>
+                      </span>
                     </a>
                   ))}
                 </div>

@@ -24,14 +24,8 @@ function ImpactDots({ level }) {
 
 export default function Achievements() {
   const [items] = useState(achievements);
-  const [animKey, setAnimKey] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const ref = useRef(null);
-
-  useEffect(() => {
-    const timer = setInterval(() => setAnimKey(k => k + 1), 4000);
-    return () => clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -62,7 +56,6 @@ export default function Achievements() {
         <div className="text-center mb-16 reveal">
           <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
             <DecryptedText
-              key={animKey}
               text="ACHIEVEMENTS"
               animateOn="view"
               sequential

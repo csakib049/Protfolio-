@@ -1,0 +1,58 @@
+.skill-velocity-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 0.55rem 1.25rem;
+  border-top: 1px solid rgb(var(--color-primary-rgb) / 0.18);
+  border-bottom: 1px solid rgb(var(--color-primary-rgb) / 0.18);
+  background: rgb(var(--color-bg-rgb) / 0.7);
+}
+
+.skill-velocity-row {
+  height: 2.55rem;
+  color: var(--color-primary-hex);
+}
+
+.skill-velocity-row .scroller {
+  width: max-content;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  white-space: nowrap;
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: clamp(0.58rem, 0.75vw, 0.68rem);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  will-change: transform;
+}
+
+.skill-velocity-copy,
+.skill-velocity-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.skill-velocity-copy {
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.skill-velocity-separator {
+  color: var(--color-primary-hex);
+  margin: 0 1.45rem;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.skill-velocity-outline {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+  opacity: 0.66;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-velocity-row .scroller {
+    will-change: auto;
+  }
+}

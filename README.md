@@ -8,7 +8,7 @@ This is a static React/Vite portfolio. It has no API server or database dependen
 - Update `settings.json` for the default theme, font, and resume link. Theme selections made by a visitor are saved in their browser only.
 - Add images under `client/public/` (or `client/public/uploads/`) and use a root-relative path such as `/uploads/project.webp` in JSON.
 - To optimize JPG/PNG assets and update their local references, run `python client/scripts/optimize_images.py` (requires Pillow).
-- `github-years.json` contains cached GitHub activity snapshots. Update it manually when you want to refresh the activity display; the deployed site makes no GitHub/API request.
+- `github-years.json` contains the local GitHub activity snapshots. Refresh the current snapshot with `npm run refresh:github`, then push the updated JSON to redeploy. The deployed site makes no live GitHub/API request.
 
 Run locally from the repository root with `npm run dev`; create a production bundle with `npm run build`.
 

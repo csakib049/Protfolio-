@@ -1,18 +1,18 @@
 [
   {
-    "_id": "6a36a0ac8234f14d00f10adf",
-    "title": "Advanced Backend Project Bank Transaction System",
-    "description": "A backend bank transaction system built with Node.js, Express, and MongoDB that uses a double-entry ledger to track every transfer as an immutable, auditable record instead of a simple balance field. ",
-    "image": "/uploads/1781964972627-613688353.webp",
+    "_id": "contribscout",
+    "title": "ContribScout",
+    "description": "Find open-source GitHub repositories and issues that match your skill level. Browse and filter projects, explore files and issues, and bookmark repositories after signing in with GitHub.",
+    "image": "/contribscout-cover.webp",
+    "video": "/contribscout-launch.mp4",
     "tags": [
-      "[]"
+      "Open Source",
+      "GitHub",
+      "Issue Discovery"
     ],
-    "github": "https://github.com/csakib049/-Advanced-Backend-Project-Bank-Transaction-System-with-Node.js-Express-MongoDB-.git",
-    "live": "",
-    "order": 0,
-    "createdAt": "2026-06-20T14:16:12.656Z",
-    "updatedAt": "2026-07-25T16:25:10.485Z",
-    "__v": 0
+    "github": "https://github.com/csakib049/ContribScout",
+    "live": "https://contribscout-frontend.onrender.com/",
+    "order": 0
   },
   {
     "_id": "6a60f827ec043584a470c910",
