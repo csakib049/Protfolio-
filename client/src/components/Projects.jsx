@@ -73,7 +73,7 @@ export default function Projects() {
   if (!projects.length) return null;
 
   return (
-    <section id="projects" className="py-24 relative" ref={ref}>
+    <section id="projects" className="py-24 relative theme-grid-background" ref={ref}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 reveal">
           <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">

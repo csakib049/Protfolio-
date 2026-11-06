@@ -149,7 +149,7 @@ export default function GitHubActivity() {
   const yearLabel = selectedYear === 'last-year' ? 'the last year' : selectedYear;
 
   return (
-    <section id="github" className="py-16 relative overflow-hidden" ref={ref}>
+    <section id="github" className="py-16 relative overflow-hidden theme-grid-background" ref={ref}>
       <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 

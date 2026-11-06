@@ -381,25 +381,175 @@ html.font-space-mono {
   isolation: isolate;
 }
 
-.portfolio-hero-backdrop {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
+.theme-grid-background {
+  background-color: rgb(var(--color-bg-rgb));
+  background-image:
+    linear-gradient(to right, rgb(var(--color-primary-rgb) / 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--color-primary-rgb) / 0.1) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+}
+
+.hero-intro-label,
+.hero-module-chip,
+.hero-action-primary,
+.hero-action-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.hero-intro-label {
+  min-height: 1.75rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgb(var(--color-primary-rgb) / 0.38);
+  border-radius: 3px;
+  background: rgb(var(--color-bg-rgb) / 0.3);
+  color: var(--color-primary-hex);
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.07em;
+}
+
+.hero-action-primary,
+.hero-action-secondary {
+  min-height: 2.65rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgb(var(--color-primary-rgb) / 0.45);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.hero-action-primary {
+  background: rgb(var(--color-primary-rgb) / 0.14);
+  color: var(--color-primary-hex);
+}
+
+.hero-action-primary:hover {
+  background: rgb(var(--color-primary-rgb) / 0.24);
+  border-color: var(--color-primary-hex);
+  transform: translateY(-1px);
+}
+
+.hero-action-secondary {
+  border-color: rgb(var(--color-text-rgb) / 0.2);
+  background: rgb(var(--color-bg-rgb) / 0.35);
+  color: rgb(var(--color-text-rgb) / 0.85);
+}
+
+.hero-action-secondary:hover {
+  border-color: rgb(var(--color-primary-rgb) / 0.55);
+  color: var(--color-primary-hex);
+  transform: translateY(-1px);
+}
+
+.hero-module-chip {
+  min-height: 1.4rem;
+  padding: 0.2rem 0.42rem;
+  border: 1px solid rgb(var(--color-primary-rgb) / 0.28);
+  border-radius: 3px;
+  background: rgb(var(--color-bg-rgb) / 0.28);
+  color: var(--color-primary-hex);
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+}
+
+.hero-code-window {
   overflow: hidden;
-  pointer-events: none;
+  border: 1px solid rgb(var(--color-primary-rgb) / 0.24);
+  border-radius: 0.8rem;
+  background: rgb(var(--color-bg-rgb) / 0.92);
+  box-shadow: 0 24px 56px rgb(0 0 0 / 0.35);
 }
 
-.portfolio-hero-backdrop img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+.hero-code-titlebar {
+  display: flex;
+  height: 2.6rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.85rem;
+  background: rgb(var(--color-text-rgb) / 0.14);
 }
 
-.portfolio-hero-shade {
-  position: absolute;
-  inset: 0;
-  background: rgb(var(--color-bg-rgb) / 0.72);
+.hero-code-filename {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgb(var(--color-text-rgb) / 0.66);
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 0.68rem;
+}
+
+.hero-code-content {
+  color: rgb(var(--color-text-rgb) / 0.9);
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: clamp(0.6rem, 1.05vw, 0.8rem);
+  line-height: 1.9;
+}
+
+.hero-code-line {
+  display: flex;
+  min-height: 1.5em;
+  gap: 1.1rem;
+}
+
+.hero-code-number {
+  width: 1.2rem;
+  flex: 0 0 auto;
+  color: rgb(var(--color-text-muted-rgb) / 0.8);
+  text-align: right;
+  user-select: none;
+}
+
+.hero-code-comment {
+  color: rgb(var(--color-text-muted-rgb) / 0.95);
+}
+
+.hero-code-string {
+  color: var(--color-primary-hex);
+}
+
+.hero-code-operator {
+  color: rgb(var(--color-text-rgb) / 0.68);
+}
+
+.hero-code-keyword {
+  color: var(--color-primary-hex);
+}
+
+.hero-code-caret {
+  display: inline-block;
+  width: 0.22rem;
+  height: 1rem;
+  background: var(--color-primary-hex);
+  animation: heroCaret 1s steps(2, start) infinite;
+}
+
+.hero-code-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0 1rem 1rem;
+}
+
+.hero-action-compact {
+  min-height: 2.2rem;
+  padding: 0.5rem 0.75rem;
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 0.62rem;
+}
+
+@keyframes heroCaret {
+  to { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-code-caret { animation: none; }
 }
 
 .navbar-mark {

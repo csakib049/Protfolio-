@@ -34,7 +34,7 @@ export default function Newsletter() {
 
   return (
     <>
-    <section id="newsletter" className="py-24 relative" ref={ref}>
+    <section id="newsletter" className="py-24 relative theme-grid-background" ref={ref}>
       <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 

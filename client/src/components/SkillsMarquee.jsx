@@ -7,6 +7,15 @@ export default function SkillsMarquee() {
 
   return (
     <section className="relative min-h-screen flex items-center py-12 overflow-hidden">
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <img
+          src="/sakib_perfect.webp"
+          alt=""
+          className="h-full w-full object-cover"
+          style={{ objectPosition: 'center top' }}
+        />
+        <div className="absolute inset-0 bg-dark/75" />
+      </div>
       <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
         <div className="text-center mb-10">
           <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">

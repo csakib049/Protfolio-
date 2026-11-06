@@ -21,11 +21,7 @@ const skillRows = [skillNames.join(' • ')].filter(Boolean);
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-dark overflow-hidden">
-      <div className="portfolio-hero-shell">
-        <div className="portfolio-hero-backdrop" aria-hidden="true">
-          <img src="/sakib_perfect.webp" alt="" />
-          <div className="portfolio-hero-shade" />
-        </div>
+      <div className="portfolio-hero-shell theme-grid-background">
         <Navbar />
         <div className="relative z-10 pt-[4.25rem]">
           <ScrollVelocity texts={skillRows} velocity={32} />
