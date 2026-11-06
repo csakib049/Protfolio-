@@ -4,7 +4,7 @@
   padding: 0.55rem 1.25rem;
   border-top: 1px solid rgb(var(--color-primary-rgb) / 0.18);
   border-bottom: 1px solid rgb(var(--color-primary-rgb) / 0.18);
-  background: rgb(var(--color-bg-rgb) / 0.7);
+  background: transparent;
 }
 
 .skill-velocity-row {

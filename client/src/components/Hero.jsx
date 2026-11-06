@@ -58,14 +58,7 @@ export default function Hero() {
   const resumeUrl = settings.resume || '/cv.pdf';
 
   return (
-    <section className="relative min-h-screen flex flex-col lg:flex-row">
-      <img
-        src="/sakib_perfect.webp"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ objectPosition: 'center top' }}
-      />
-      <div className="absolute inset-0 bg-dark/80" />
+    <section className="relative z-10 min-h-screen flex flex-col lg:flex-row">
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
 
